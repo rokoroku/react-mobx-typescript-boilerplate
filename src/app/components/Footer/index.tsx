@@ -1,19 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import * as style from './style.css';
-import { TodoFilter } from '../../models/TodoModel'
-
-const FILTER_TITLES = {
-  [TodoFilter.ALL]: 'All',
-  [TodoFilter.ACTIVE]: 'Active',
-  [TodoFilter.COMPLETED]: 'Completed'
-};
-
-const FILTER_TYPES = [
-  TodoFilter.ALL,
-  TodoFilter.ACTIVE,
-  TodoFilter.COMPLETED
-];
+import { TodoFilter, TODO_FILTER_TITLES, TODO_FILTER_TYPES } from '../../constants/todos';
 
 export interface FooterProps {
   filter: TodoFilter;
@@ -41,7 +29,7 @@ export class Footer extends React.Component<FooterProps, FooterState> {
   }
 
   renderFilterLink(filter: TodoFilter) {
-    const title = FILTER_TITLES[filter];
+    const title = TODO_FILTER_TITLES[filter];
     const { filter: selectedFilter, onChangeFilter } = this.props;
     const className = classNames({
       [style.selected]: filter === selectedFilter
@@ -72,7 +60,7 @@ export class Footer extends React.Component<FooterProps, FooterState> {
       <footer className={style.normal}>
         {this.renderTodoCount()}
         <ul className={style.filters}>
-          {FILTER_TYPES.map((filter) =>
+          {TODO_FILTER_TYPES.map((filter) =>
             <li key={filter} children={this.renderFilterLink(filter)} />
           )}
         </ul>

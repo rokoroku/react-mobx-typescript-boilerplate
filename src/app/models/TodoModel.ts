@@ -18,10 +18,4 @@ export class TodoModel {
   }
 }
 
-export enum TodoFilter {
-  ALL = 0,
-  ACTIVE,
-  COMPLETED
-}
-
 export default TodoModel;

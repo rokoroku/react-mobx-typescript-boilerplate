@@ -3,9 +3,10 @@ import { inject, observer } from 'mobx-react';
 import { Header } from '../../components/Header';
 import { TodoList } from '../../components/TodoList';
 import { Footer } from '../../components/Footer';
-import { TodoModel, TodoFilter } from '../../models/TodoModel';
+import { TodoModel } from '../../models/TodoModel';
 import { TodoStore, RouterStore } from '../../stores';
 import { STORE_TODO, STORE_ROUTER } from '../../constants/stores';
+import { TodoFilter, TODO_FILTER_LOCATION_HASH } from '../../constants/todos';
 import * as style from './style.css';
 
 export interface TodoAppProps {
@@ -15,12 +16,6 @@ export interface TodoAppProps {
 
 export interface TodoAppState {
   filter: TodoFilter;
-}
-
-const TodoFilterHash = {
-  [TodoFilter.ALL]: '#',
-  [TodoFilter.ACTIVE]: '#active',
-  [TodoFilter.COMPLETED]: '#completed',
 }
 
 @inject((store) => ({
@@ -38,16 +33,16 @@ export class TodoApp extends React.Component<TodoAppProps, TodoAppState> {
 
   componentWillReceiveProps(nextProps: TodoAppProps, nextContext: any) {
     const { router } = nextProps;
-    const filter = Object.keys(TodoFilterHash)
+    const filter = Object.keys(TODO_FILTER_LOCATION_HASH)
       .map((key) => Number(key) as TodoFilter)
-      .find((filter) => TodoFilterHash[filter] === router.location.hash);
+      .find((filter) => TODO_FILTER_LOCATION_HASH[filter] === router.location.hash);
     this.setState({ filter });
   }
 
   handleFilter(filter: TodoFilter) {
     const { router } = this.props;
     const currentHash = router.location.hash;
-    const nextHash = TodoFilterHash[filter];
+    const nextHash = TODO_FILTER_LOCATION_HASH[filter];
     if (currentHash !== nextHash) {
       this.props.router.replace(nextHash);
     }
