@@ -2,7 +2,7 @@
 
 A react-mobx-webpack-postcss-typescript boilerplate based on TJ's [frontend-boilerplate](https://github.com/tj/frontend-boilerplate).
 
-See also: [front-react-redux-boilerplate](https://github.com/rokoroku/typescript-react-redux-boilerplate)
+See also: [typescript-react-redux-boilerplate](https://github.com/rokoroku/typescript-react-redux-boilerplate)
 
 ## Contains
 
