@@ -1,6 +1,8 @@
 # Frontend Boilerplate with React, MobX and TypeScript
 
-A react-mobx-webpack-postcss-typescript boilerplate
+A react-mobx-webpack-postcss-typescript boilerplate based on TJ's [frontend-boilerplate](https://github.com/tj/frontend-boilerplate).
+
+See also: [front-react-redux-boilerplate](https://github.com/rokoroku/typescript-react-redux-boilerplate)
 
 ## Contains
 
@@ -44,9 +46,10 @@ $ npm run build
 
 ## Note
 
-- Since webpack 2 is still in beta, related plugins may be unstable for now.
-- This boilerplate doesn't contain any testing frameworks. Use something that suits your taste  
-(such as [Mocha](https://github.com/mochajs/mocha), [Jasmine](https://github.com/jasmine/jasmine), or [Jest](https://github.com/facebook/jest)).
+- Since webpack 2 is still in beta, related dependencies can occur ``UNMET PEER DEPENDENCY`` errors.  
+To avoid error, use **npm >=3.0.0**
+- This boilerplate doesn't contain any testing frameworks. Use something that suits your taste.  
+(such as [Mocha](https://github.com/mochajs/mocha), [Jasmine](https://github.com/jasmine/jasmine), or [Jest](https://github.com/facebook/jest))
 
 
 # License
