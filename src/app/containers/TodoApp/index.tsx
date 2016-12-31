@@ -10,18 +10,16 @@ import { TodoFilter, TODO_FILTER_LOCATION_HASH } from '../../constants/todos';
 import * as style from './style.css';
 
 export interface TodoAppProps {
-  todoStore: TodoStore;
-  router: RouterStore;
+  /** MobX Stores will be injected via @inject() **/
+  // [STORE_ROUTER]: RouterStore;
+  // [STOURE_TODO]: TodoStore;
 }
 
 export interface TodoAppState {
   filter: TodoFilter;
 }
 
-@inject((store) => ({
-  todoStore: store[STORE_TODO],
-  router: store[STORE_ROUTER]
-}))
+@inject(STORE_TODO, STORE_ROUTER)
 @observer
 export class TodoApp extends React.Component<TodoAppProps, TodoAppState> {
 
@@ -31,8 +29,16 @@ export class TodoApp extends React.Component<TodoAppProps, TodoAppState> {
     this.handleFilter = this.handleFilter.bind(this);
   }
 
+  componentWillMount() {
+    this.checkLocationChange();
+  }
+
   componentWillReceiveProps(nextProps: TodoAppProps, nextContext: any) {
-    const { router } = nextProps;
+    this.checkLocationChange();
+  }
+
+  checkLocationChange() {
+    const router = this.props[STORE_ROUTER] as RouterStore;
     const filter = Object.keys(TODO_FILTER_LOCATION_HASH)
       .map((key) => Number(key) as TodoFilter)
       .find((filter) => TODO_FILTER_LOCATION_HASH[filter] === router.location.hash);
@@ -40,16 +46,16 @@ export class TodoApp extends React.Component<TodoAppProps, TodoAppState> {
   }
 
   handleFilter(filter: TodoFilter) {
-    const { router } = this.props;
+    const router = this.props[STORE_ROUTER] as RouterStore;
     const currentHash = router.location.hash;
     const nextHash = TODO_FILTER_LOCATION_HASH[filter];
     if (currentHash !== nextHash) {
-      this.props.router.replace(nextHash);
+      router.replace(nextHash);
     }
   }
 
   getFilteredTodo(filter: TodoFilter) {
-    const { todoStore } = this.props;
+    const todoStore = this.props[STORE_TODO] as TodoStore;
     switch (filter) {
       case TodoFilter.ACTIVE: return todoStore.activeTodos;
       case TodoFilter.COMPLETED: return todoStore.completedTodos;
@@ -58,7 +64,8 @@ export class TodoApp extends React.Component<TodoAppProps, TodoAppState> {
   }
 
   render() {
-    const { todoStore, children } = this.props;
+    const todoStore = this.props[STORE_TODO] as TodoStore;
+    const { children } = this.props;
     const { filter } = this.state;
     const filteredTodos = this.getFilteredTodo(filter);
 

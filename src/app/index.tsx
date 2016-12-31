@@ -30,7 +30,7 @@ const rootStores = {
 // render react DOM
 ReactDOM.render(
   <Provider {...rootStores} >
-    <Router history={routerStore.history} >
+    <Router history={browserHistory} >
       <Route path='/' component={App} >
         <IndexRoute component={TodoApp} />
       </Route>

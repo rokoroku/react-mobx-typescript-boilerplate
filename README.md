@@ -17,7 +17,7 @@ See also: [react-redux-typescript-boilerplate](https://github.com/rokoroku/react
 
 ### Build tools
 
-- [x] [Webpack](https://webpack.github.io) 2.2.0-rc2
+- [x] [Webpack](https://webpack.github.io) 2.2.0-rc.3
 - [x] [Awesome Typescript Loader](https://github.com/s-panferov/awesome-typescript-loader) 3.0.0-beta17
 - [x] [PostCSS Loader](https://github.com/postcss/postcss-loader) 1.2.1
   - [x] [CSS next](https://github.com/MoOx/postcss-cssnext)
