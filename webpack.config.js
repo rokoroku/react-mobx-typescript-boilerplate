@@ -39,10 +39,12 @@ module.exports = {
       // .ts, .tsx
       {
         test: /\.tsx?$/,
-        loader: [
-          'react-hot-loader',
-          'awesome-typescript-loader'
-        ],
+        loader: isProduction
+          ? 'awesome-typescript-loader?module=es6'
+          : [
+            'react-hot-loader',
+            'awesome-typescript-loader'
+          ]
       },
       // css 
       {
