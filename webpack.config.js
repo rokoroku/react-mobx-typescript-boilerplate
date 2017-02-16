@@ -26,20 +26,21 @@ module.exports = {
   output: {
     path: outPath,
     filename: 'bundle.js',
+    publicPath: '/'
   },
   target: 'web',
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
     // Fix webpack's default behavior to not load packages with jsnext:main module
-    // https://github.com/Microsoft/TypeScript/issues/11677 
-    mainFields: ['main']
+    // (jsnext:main directs not usually distributable es6 format, but es6 sources)
+    mainFields: ['module', 'browser', 'main']
   },
   module: {
     loaders: [
       // .ts, .tsx
       {
         test: /\.tsx?$/,
-        loader: isProduction
+        use: isProduction
           ? 'awesome-typescript-loader?module=es6'
           : [
             'react-hot-loader',
@@ -49,8 +50,8 @@ module.exports = {
       // css 
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
           loader: [
             {
               loader: 'css-loader',
@@ -68,9 +69,9 @@ module.exports = {
         })
       },
       // static assets 
-      { test: /\.html$/, loader: 'html-loader' },
-      { test: /\.png$/, loader: 'url-loader?limit=10000' },
-      { test: /\.jpg$/, loader: 'file-loader' },
+      { test: /\.html$/, use: 'html-loader' },
+      { test: /\.png$/, use: 'url-loader?limit=10000' },
+      { test: /\.jpg$/, use: 'file-loader' },
     ],
   },
   plugins: [
