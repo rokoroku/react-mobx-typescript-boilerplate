@@ -1,14 +1,14 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { render as ReactDomRender } from 'react-dom';
 import { useStrict } from 'mobx';
 import { Provider } from 'mobx-react';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import { App } from './containers/App';
-import { TodoApp } from './containers/TodoApp';
+import { Entry } from './containers/Entry';
 import { TodoModel } from './models/TodoModel';
 import { TodoStore, RouterStore } from './stores';
 import { STORE_TODO, STORE_ROUTER } from './constants/stores';
 import { TodoFilter } from './constants/todos';
+import { AppContainer } from 'react-hot-loader';
 
 // enable MobX strict mode
 useStrict(true);
@@ -28,13 +28,19 @@ const rootStores = {
 };
 
 // render react DOM
-ReactDOM.render(
-  <Provider {...rootStores} >
-    <Router history={browserHistory} >
-      <Route path='/' component={App} >
-        <IndexRoute component={TodoApp} />
-      </Route>
-    </Router>
-  </Provider >,
-  document.getElementById('root')
-);
+const render = () => {
+  ReactDomRender(
+    <AppContainer>
+      <Provider {...rootStores} >
+        <Entry />
+      </Provider >
+    </AppContainer>,
+    document.getElementById('root')
+  )
+}
+
+render()
+
+if ((module as any).hot) {
+  (module as any).hot.accept('./containers/Entry', () => { render(); })
+}
