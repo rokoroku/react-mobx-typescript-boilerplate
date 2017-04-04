@@ -13,7 +13,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   context: sourcePath,
   entry: {
-    main: './index.ts',
+    main: ['react-hot-loader/patch', './index.ts'],
     vendor: [
       'react',
       'react-dom',
@@ -43,8 +43,8 @@ module.exports = {
         use: isProduction
           ? 'awesome-typescript-loader?module=es6'
           : [
-            'react-hot-loader',
-            'awesome-typescript-loader'
+            'react-hot-loader/webpack',
+            'awesome-typescript-loader?module=es6'
           ]
       },
       // css 
