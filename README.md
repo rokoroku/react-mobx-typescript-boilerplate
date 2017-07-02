@@ -1,14 +1,18 @@
-# Frontend Boilerplate with React, MobX and TypeScript
+# Frontend Boilerplate with React, MobX & TypeScript
 
-A react-mobx-webpack-postcss-typescript boilerplate based on TJ's [frontend-boilerplate](https://github.com/tj/frontend-boilerplate).
+A bare minimum react-mobx-webpack-typescript boilerplate with TodoMVC example.
+
+Note that this project does not include **Server-Side Rendering**,  **Testing Frameworks** and other stuffs that makes the package unnecessarily complicated.
+
+Ideal for creating React apps from the scratch.
 
 See also: [react-redux-typescript-boilerplate](https://github.com/rokoroku/react-redux-typescript-boilerplate)
 
 ## Contains
 
-- [x] [Typescript](https://www.typescriptlang.org/) 2.2
-- [x] [React](https://facebook.github.io/react/) 15.4
-- [x] [React Router](https://github.com/ReactTraining/react-router/) 3.0
+- [x] [Typescript](https://www.typescriptlang.org/) 2.4.1
+- [x] [React](https://facebook.github.io/react/) 15.6
+- [x] [React Router](https://github.com/ReactTraining/react-router) 4.1
 - [x] [Mobx](https://github.com/mobxjs/mobx)
 - [x] [Mobx React](https://github.com/mobxjs/mobx-react)
 - [x] [Mobx React Router](https://github.com/alisd23/mobx-react-router/)
@@ -17,16 +21,17 @@ See also: [react-redux-typescript-boilerplate](https://github.com/rokoroku/react
 
 ### Build tools
 
-- [x] [Webpack](https://webpack.github.io) 2.2
+- [x] [Webpack](https://webpack.github.io) 3.0
   - [x] [Tree Shaking](https://medium.com/@Rich_Harris/tree-shaking-versus-dead-code-elimination-d3765df85c80)
   - [x] [Webpack Dev Server](https://github.com/webpack/webpack-dev-server)
-- [x] [Awesome Typescript Loader](https://github.com/s-panferov/awesome-typescript-loader) 3.0
-- [x] [PostCSS Loader](https://github.com/postcss/postcss-loader) 1.2
+- [x] [Awesome Typescript Loader](https://github.com/s-panferov/awesome-typescript-loader)
+- [x] [PostCSS Loader](https://github.com/postcss/postcss-loader)
   - [x] [CSS next](https://github.com/MoOx/postcss-cssnext)
   - [x] [CSS modules](https://github.com/css-modules/css-modules)
-- [x] [React Hot Loader](https://github.com/gaearon/react-hot-loader) 1.3
+- [x] [React Hot Loader](https://github.com/gaearon/react-hot-loader)
 - [x] [ExtractText Plugin](https://github.com/webpack/extract-text-webpack-plugin)
 - [x] [HTML Webpack Plugin](https://github.com/ampedandwired/html-webpack-plugin)
+
 
 ## Setup
 
@@ -45,12 +50,6 @@ $ npm start
 ```
 $ npm run build
 ```
-
-## Note
-
-- This boilerplate doesn't contain any testing frameworks. Use something that suits your taste.  
-(such as [Mocha](https://github.com/mochajs/mocha), [Jasmine](https://github.com/jasmine/jasmine), or [Jest](https://github.com/facebook/jest))
-
 
 # License
 
