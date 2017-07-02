@@ -63,7 +63,16 @@ module.exports = {
               }
             },
             {
-              loader: 'postcss-loader'
+              loader: 'postcss-loader',
+              options: {
+                plugins: [
+                  require('postcss-import')({ addDependencyTo: webpack }),
+                  require('postcss-url')(),
+                  require('postcss-cssnext')(),
+                  require('postcss-reporter')(),
+                  require('postcss-browser-reporter')({ disabled: isProduction }),
+                ]
+              }
             }
           ]
         })
