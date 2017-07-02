@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export class App extends React.Component<any, any> {
+export class Root extends React.Component<any, any> {
 
   renderDevTool() {
     if (process.env.NODE_ENV !== 'production') {
