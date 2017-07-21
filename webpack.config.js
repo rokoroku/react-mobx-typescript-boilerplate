@@ -65,6 +65,7 @@ module.exports = {
             {
               loader: 'postcss-loader',
               options: {
+                ident: 'postcss',
                 plugins: [
                   require('postcss-import')({ addDependencyTo: webpack }),
                   require('postcss-url')(),
@@ -86,14 +87,7 @@ module.exports = {
   plugins: [
     new webpack.LoaderOptionsPlugin({
       options: {
-        context: sourcePath,
-        postcss: [
-          require('postcss-import')({ addDependencyTo: webpack }),
-          require('postcss-url')(),
-          require('postcss-cssnext')(),
-          require('postcss-reporter')(),
-          require('postcss-browser-reporter')({ disabled: isProduction }),
-        ]
+        context: sourcePath
       }
     }),
     new webpack.optimize.CommonsChunkPlugin({
