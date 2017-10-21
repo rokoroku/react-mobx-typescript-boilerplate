@@ -10,8 +10,8 @@ See also: [react-redux-typescript-boilerplate](https://github.com/rokoroku/react
 
 ## Contains
 
-- [x] [Typescript](https://www.typescriptlang.org/) 2.5.2
-- [x] [React](https://facebook.github.io/react/) 15.6.1
+- [x] [Typescript](https://www.typescriptlang.org/) 2.5
+- [x] [React](https://facebook.github.io/react/) 16
 - [x] [React Router](https://github.com/ReactTraining/react-router) 4.2
 - [x] [Mobx](https://github.com/mobxjs/mobx)
 - [x] [Mobx React](https://github.com/mobxjs/mobx-react)
@@ -21,7 +21,7 @@ See also: [react-redux-typescript-boilerplate](https://github.com/rokoroku/react
 
 ### Build tools
 
-- [x] [Webpack](https://webpack.github.io) 3.5.6
+- [x] [Webpack](https://webpack.github.io) 3.8
   - [x] [Tree Shaking](https://medium.com/@Rich_Harris/tree-shaking-versus-dead-code-elimination-d3765df85c80)
   - [x] [Webpack Dev Server](https://github.com/webpack/webpack-dev-server)
 - [x] [Awesome Typescript Loader](https://github.com/s-panferov/awesome-typescript-loader)
