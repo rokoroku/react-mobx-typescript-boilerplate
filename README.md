@@ -22,7 +22,7 @@ See also: [react-redux-typescript-boilerplate](https://github.com/rokoroku/react
 ### Build tools
 
 - [x] [Webpack](https://webpack.github.io) 3.8
-  - [x] [Tree Shaking](https://medium.com/@Rich_Harris/tree-shaking-versus-dead-code-elimination-d3765df85c80)
+  - [x] [Tree Shaking](https://webpack.js.org/guides/tree-shaking/)
   - [x] [Webpack Dev Server](https://github.com/webpack/webpack-dev-server)
 - [x] [Awesome Typescript Loader](https://github.com/s-panferov/awesome-typescript-loader)
 - [x] [PostCSS Loader](https://github.com/postcss/postcss-loader)

@@ -41,7 +41,7 @@ module.exports = {
       {
         test: /\.tsx?$/,
         use: isProduction
-          ? 'awesome-typescript-loader?module=es6'
+          ? 'awesome-typescript-loader'
           : [
             'react-hot-loader/webpack',
             'awesome-typescript-loader'
@@ -100,6 +100,7 @@ module.exports = {
       filename: 'styles.css',
       disable: !isProduction
     }),
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new HtmlWebpackPlugin({
       template: 'assets/index.html'
     })
