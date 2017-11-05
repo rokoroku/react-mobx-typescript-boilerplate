@@ -21,12 +21,9 @@ export class TodoTextInput extends React.Component<TodoTextInputProps, TodoTextI
     this.state = {
       text: this.props.text || ''
     };
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleSubmit(e) {
+  private handleSubmit = (e) => {
     const text = e.target.value.trim();
     if (e.which === 13) {
       this.props.onSave(text)
@@ -36,11 +33,11 @@ export class TodoTextInput extends React.Component<TodoTextInputProps, TodoTextI
     }
   }
 
-  handleChange(e) {
+  private handleChange = (e) => {
     this.setState({ text: e.target.value });
   }
 
-  handleBlur(e) {
+  private handleBlur = (e) => {
     const text = e.target.value.trim();
     if (!this.props.newTodo) {
       this.props.onSave(text);

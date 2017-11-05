@@ -27,7 +27,6 @@ export class TodoApp extends React.Component<TodoAppProps, TodoAppState> {
   constructor(props: TodoAppProps, context: any) {
     super(props, context);
     this.state = { filter: TodoFilter.ALL };
-    this.handleFilter = this.handleFilter.bind(this);
   }
 
   componentWillMount() {
@@ -46,7 +45,7 @@ export class TodoApp extends React.Component<TodoAppProps, TodoAppState> {
     this.setState({ filter });
   }
 
-  handleFilter(filter: TodoFilter) {
+  private handleFilter = (filter: TodoFilter) => {
     const router = this.props[STORE_ROUTER] as RouterStore;
     const currentHash = router.location.hash;
     const nextHash = TODO_FILTER_LOCATION_HASH[filter];

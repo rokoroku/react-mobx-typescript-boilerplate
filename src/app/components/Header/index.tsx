@@ -12,12 +12,7 @@ export interface HeaderState {
 
 export class Header extends React.Component<HeaderProps, HeaderState> {
 
-  constructor(props?: HeaderProps, context?: any) {
-    super(props, context);
-    this.handleSave = this.handleSave.bind(this);
-  }
-
-  handleSave(text: string) {
+  private handleSave = (text: string) => {
     if (text.length) {
       this.props.addTodo({ text });
     }
