@@ -17,10 +17,9 @@ export class TodoList extends React.Component<TodoListProps, TodoListState> {
 
   constructor(props?: TodoListProps, context?: any) {
     super(props, context);
-    this.handleToggleAll = this.handleToggleAll.bind(this);
   }
 
-  handleToggleAll(e: React.SyntheticEvent<any>) {
+  private handleToggleAll = (e: React.SyntheticEvent<any>) => {
     e.preventDefault();
     this.props.completeAll();
   }
