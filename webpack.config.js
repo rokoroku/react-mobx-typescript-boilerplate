@@ -9,23 +9,17 @@ var outPath = path.join(__dirname, './dist');
 // plugins
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 
 module.exports = {
   context: sourcePath,
   entry: {
-    main: './index.ts',
-    vendor: [
-      'react',
-      'react-dom',
-      'react-router',
-      'mobx',
-      'mobx-react',
-      'mobx-react-router'
-    ]
+    main: './index.ts'
   },
   output: {
     path: outPath,
     filename: 'bundle.js',
+    chunkFilename: '[chunkhash].js',
     publicPath: '/'
   },
   target: 'web',
@@ -36,18 +30,15 @@ module.exports = {
     mainFields: ['module', 'browser', 'main']
   },
   module: {
-    loaders: [
+    rules: [
       // .ts, .tsx
       {
         test: /\.tsx?$/,
         use: isProduction
-          ? 'awesome-typescript-loader'
-          : [
-            'react-hot-loader/webpack',
-            'awesome-typescript-loader'
-          ]
+          ? 'ts-loader'
+          : ['babel-loader?plugins=react-hot-loader/babel', 'ts-loader']
       },
-      // css 
+      // css
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
@@ -71,36 +62,44 @@ module.exports = {
                   require('postcss-url')(),
                   require('postcss-cssnext')(),
                   require('postcss-reporter')(),
-                  require('postcss-browser-reporter')({ disabled: isProduction }),
+                  require('postcss-browser-reporter')({
+                    disabled: isProduction
+                  })
                 ]
               }
             }
           ]
         })
       },
-      // static assets 
+      // static assets
       { test: /\.html$/, use: 'html-loader' },
       { test: /\.png$/, use: 'url-loader?limit=10000' },
-      { test: /\.jpg$/, use: 'file-loader' },
-    ],
+      { test: /\.jpg$/, use: 'file-loader' }
+    ]
+  },
+  optimization: {
+    splitChunks: {
+      name: true,
+      cacheGroups: {
+        commons: {
+          chunks: 'initial',
+          minChunks: 2
+        },
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          chunks: 'all',
+          priority: -10
+        }
+      }
+    },
+    runtimeChunk: true
   },
   plugins: [
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        context: sourcePath
-      }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      filename: 'vendor.bundle.js',
-      minChunks: Infinity
-    }),
-    new webpack.optimize.AggressiveMergingPlugin(),
+    new WebpackCleanupPlugin(),
     new ExtractTextPlugin({
       filename: 'styles.css',
       disable: !isProduction
     }),
-    new webpack.optimize.ModuleConcatenationPlugin(),
     new HtmlWebpackPlugin({
       template: 'assets/index.html'
     })
@@ -110,10 +109,10 @@ module.exports = {
     hot: true,
     stats: {
       warnings: false
-    },
+    }
   },
   node: {
-    // workaround for webpack-dev-server issue 
+    // workaround for webpack-dev-server issue
     // https://github.com/webpack/webpack-dev-server/issues/60#issuecomment-103411179
     fs: 'empty',
     net: 'empty'

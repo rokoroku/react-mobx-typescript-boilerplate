@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { hot } from 'react-hot-loader';
 import { createBrowserHistory } from 'history';
 import { useStrict } from 'mobx';
 import { Provider } from 'mobx-react';
@@ -17,7 +18,7 @@ useStrict(true);
 // default fixtures for TodoStore
 const defaultTodos = [
   new TodoModel('Use Mobx'),
-  new TodoModel('Use React', true),
+  new TodoModel('Use React', true)
 ];
 
 // prepare MobX stores
@@ -30,15 +31,16 @@ const rootStores = {
 };
 
 // render react DOM
-ReactDOM.render(
-  <Provider {...rootStores} >
+const HotWrapper = hot(module)(() => (
+  <Provider {...rootStores}>
     <Root>
-      <Router history={history} >
+      <Router history={history}>
         <Switch>
           <Route path="/" component={TodoApp} />
         </Switch>
       </Router>
     </Root>
-  </Provider >,
-  document.getElementById('root')
-);
+  </Provider>
+));
+
+ReactDOM.render(<HotWrapper />, document.getElementById('root'));
