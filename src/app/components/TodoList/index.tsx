@@ -7,14 +7,11 @@ import * as style from './style.css';
 export interface TodoListProps extends TodoActions {
   todos: TodoModel[];
   completeAll: () => any;
-};
+}
 
-export interface TodoListState {
-
-};
+export interface TodoListState {}
 
 export class TodoList extends React.Component<TodoListProps, TodoListState> {
-
   constructor(props?: TodoListProps, context?: any) {
     super(props, context);
   }
@@ -22,7 +19,7 @@ export class TodoList extends React.Component<TodoListProps, TodoListState> {
   private handleToggleAll = (e: React.SyntheticEvent<any>) => {
     e.preventDefault();
     this.props.completeAll();
-  }
+  };
 
   renderToggleAll() {
     const { todos, ...actions } = this.props;
@@ -33,7 +30,8 @@ export class TodoList extends React.Component<TodoListProps, TodoListState> {
           className={style.toggleAll}
           type="checkbox"
           checked={completedCount === todos.length}
-          onChange={this.handleToggleAll} />
+          onChange={this.handleToggleAll}
+        />
       );
     }
   }
@@ -44,9 +42,9 @@ export class TodoList extends React.Component<TodoListProps, TodoListState> {
       <section className={style.main}>
         {this.renderToggleAll()}
         <ul className={style.normal}>
-          {todos.map(todo =>
+          {todos.map((todo) => (
             <TodoItem key={todo.id} todo={todo} {...actions} />
-          )}
+          ))}
         </ul>
       </section>
     );

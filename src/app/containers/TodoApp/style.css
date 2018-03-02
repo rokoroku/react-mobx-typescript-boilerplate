@@ -36,7 +36,7 @@ body {
 }
 
 button,
-input[type="checkbox"] {
+input[type='checkbox'] {
   outline: none;
 }
 

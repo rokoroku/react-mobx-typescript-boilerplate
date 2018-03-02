@@ -1,7 +1,11 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import * as style from './style.css';
-import { TodoFilter, TODO_FILTER_TITLES, TODO_FILTER_TYPES } from '../../constants/todos';
+import {
+  TodoFilter,
+  TODO_FILTER_TITLES,
+  TODO_FILTER_TYPES
+} from '../../constants/todos';
 
 export interface FooterProps {
   filter: TodoFilter;
@@ -9,14 +13,13 @@ export interface FooterProps {
   completedCount: number;
   onChangeFilter: (filter: TodoFilter) => any;
   onClearCompleted: () => any;
-};
+}
 
 export interface FooterState {
   /* empty */
 }
 
 export class Footer extends React.Component<FooterProps, FooterState> {
-
   renderTodoCount() {
     const { activeCount } = this.props;
     const itemWord = activeCount === 1 ? 'item' : 'items';
@@ -36,9 +39,11 @@ export class Footer extends React.Component<FooterProps, FooterState> {
     });
 
     return (
-      <a className={className}
+      <a
+        className={className}
         style={{ cursor: 'pointer' }}
-        onClick={() => onChangeFilter(filter)}>
+        onClick={() => onChangeFilter(filter)}
+      >
         {title}
       </a>
     );
@@ -60,9 +65,9 @@ export class Footer extends React.Component<FooterProps, FooterState> {
       <footer className={style.normal}>
         {this.renderTodoCount()}
         <ul className={style.filters}>
-          {TODO_FILTER_TYPES.map((filter) =>
+          {TODO_FILTER_TYPES.map((filter) => (
             <li key={filter} children={this.renderFilterLink(filter)} />
-          )}
+          ))}
         </ul>
         {this.renderClearButton()}
       </footer>

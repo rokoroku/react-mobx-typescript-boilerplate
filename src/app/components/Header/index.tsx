@@ -11,12 +11,11 @@ export interface HeaderState {
 }
 
 export class Header extends React.Component<HeaderProps, HeaderState> {
-
   private handleSave = (text: string) => {
     if (text.length) {
       this.props.addTodo({ text });
     }
-  }
+  };
 
   render() {
     return (
@@ -25,7 +24,8 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
         <TodoTextInput
           newTodo
           onSave={this.handleSave}
-          placeholder="What needs to be done?" />
+          placeholder="What needs to be done?"
+        />
       </header>
     );
   }

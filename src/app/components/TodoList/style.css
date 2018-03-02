@@ -130,13 +130,12 @@
   color: #737373;
 }
 
-
 /*
   Hack to remove background from Mobile Safari.
   Can't use it globally since it destroys checkboxes in Firefox
 */
 
-@media screen and (-webkit-min-device-pixel-ratio:0) {
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
   .toggleAll,
   .normal li .toggle {
     background: none;
