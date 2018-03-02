@@ -5,12 +5,11 @@ import { createBrowserHistory } from 'history';
 import { useStrict } from 'mobx';
 import { Provider } from 'mobx-react';
 import { Router, Route, Switch } from 'react-router';
-import { Root } from './containers/Root';
-import { TodoApp } from './containers/TodoApp';
-import { TodoModel } from './models/TodoModel';
-import { TodoStore, RouterStore } from './stores';
-import { STORE_TODO, STORE_ROUTER } from './constants/stores';
-import { TodoFilter } from './constants/todos';
+import { TodoModel } from 'app/models';
+import { TodoStore, RouterStore } from 'app/stores';
+import { Root } from 'app/containers/Root';
+import { TodoApp } from 'app/containers/TodoApp';
+import { STORE_TODO, STORE_ROUTER, TodoFilter } from 'app/constants';
 
 // enable MobX strict mode
 useStrict(true);

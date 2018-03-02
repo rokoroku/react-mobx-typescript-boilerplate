@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { TodoTextInput } from '../TodoTextInput';
-import { TodoModel } from '../../models/TodoModel';
+import { TodoTextInput } from 'app/components/TodoTextInput';
+import { TodoModel } from 'app/models/TodoModel';
 
 export interface HeaderProps {
   addTodo: (todo: Partial<TodoModel>) => any;
