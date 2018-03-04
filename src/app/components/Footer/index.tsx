@@ -53,9 +53,7 @@ export class Footer extends React.Component<FooterProps, FooterState> {
     const { completedCount, onClearCompleted } = this.props;
     if (completedCount > 0) {
       return (
-        <button className={style.clearCompleted} onClick={onClearCompleted}>
-          Clear completed
-        </button>
+        <button className={style.clearCompleted} onClick={onClearCompleted} />
       );
     }
   }
