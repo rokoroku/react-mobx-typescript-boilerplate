@@ -14,7 +14,7 @@ var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 module.exports = {
   context: sourcePath,
   entry: {
-    main: './index.ts'
+    main: './main.tsx'
   },
   output: {
     path: outPath,
@@ -110,10 +110,13 @@ module.exports = {
   devServer: {
     contentBase: sourcePath,
     hot: true,
-    stats: {
-      warnings: false
-    }
+    inline: true,
+    historyApiFallback: {
+      disableDotRule: true
+    },
+    stats: 'minimal'
   },
+  devtool: 'cheap-module-eval-source-map',
   node: {
     // workaround for webpack-dev-server issue
     // https://github.com/webpack/webpack-dev-server/issues/60#issuecomment-103411179
