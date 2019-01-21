@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { useStrict } from 'mobx';
+// import { useStrict } from 'mobx';
 import { Provider } from 'mobx-react';
 import { createBrowserHistory } from 'history';
 import { TodoModel } from 'app/models';
@@ -8,7 +8,7 @@ import { createStores } from 'app/stores';
 import { App } from 'app';
 
 // enable MobX strict mode
-useStrict(true);
+// useStrict(true);
 
 // default fixtures for TodoStore
 const defaultTodos = [
