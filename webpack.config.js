@@ -19,8 +19,8 @@ module.exports = {
   },
   output: {
     path: outPath,
-    filename: 'bundle.js',
-    chunkFilename: '[chunkhash].js'
+    filename: isProduction ? '[contenthash].js' : '[hash].js',
+    chunkFilename: isProduction ? '[name].[contenthash].js' : '[name].[hash].js'
   },
   target: 'web',
   resolve: {
@@ -101,7 +101,8 @@ module.exports = {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
           chunks: 'all',
-          priority: -10
+          priority: -10,
+          filename: isProduction ? 'vendor.[contenthash].js' : 'vendor.[hash].js'
         }
       }
     },
@@ -114,7 +115,7 @@ module.exports = {
     }),
     new WebpackCleanupPlugin(),
     new MiniCssExtractPlugin({
-      filename: '[contenthash].css',
+      filename: isProduction ? '[contenthash].css' : '[hash].css',
       disable: !isProduction
     }),
     new HtmlWebpackPlugin({
