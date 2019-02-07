@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: zolika84/cypress/3.1.5
+      - image: zolika84/cypress:3.1.5
     working_directory: ~/repo
     steps:
       - checkout
