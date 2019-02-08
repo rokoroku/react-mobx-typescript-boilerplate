@@ -2,9 +2,9 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
 import { createBrowserHistory } from 'history';
-import { TodoModel } from 'app/models';
-import { createStores } from 'app/stores';
-import { App } from 'app';
+import { TodoModel } from './app/models';
+import { createStores } from './app/stores';
+import { App } from './app';
 
 // default fixtures for TodoStore
 const defaultTodos = [
@@ -19,7 +19,7 @@ const rootStore = createStores(history, defaultTodos);
 // render react DOM
 ReactDOM.render(
   <Provider {...rootStore}>
-    <App history={history} />
+    <App />
   </Provider>,
   document.getElementById('root')
 );

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { TodoItem, TodoActions } from 'app/components/TodoItem';
-import { TodoModel } from 'app/models/TodoModel';
-import * as style from './style.css';
+import { TodoItem, TodoActions } from '../../components/TodoItem';
+import { TodoModel } from '../..//models/TodoModel';
+import style from './TodoList.module.css';
 
 export interface TodoListProps extends TodoActions {
   todos: TodoModel[];
@@ -11,7 +11,7 @@ export interface TodoListProps extends TodoActions {
 export interface TodoListState {}
 
 export class TodoList extends React.Component<TodoListProps, TodoListState> {
-  constructor(props?: TodoListProps, context?: any) {
+  constructor(props: TodoListProps, context?: any) {
     super(props, context);
   }
 

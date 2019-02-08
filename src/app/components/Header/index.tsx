@@ -1,9 +1,14 @@
 import * as React from 'react';
-import { TodoTextInput } from 'app/components/TodoTextInput';
-import { TodoModel } from 'app/models/TodoModel';
+import { TodoTextInput } from '../../components/TodoTextInput';
+import { TodoModel } from '../../models/TodoModel';
+import { string } from 'prop-types';
+
+interface newTodo {
+  text: string;
+}
 
 export interface HeaderProps {
-  addTodo: (todo: Partial<TodoModel>) => any;
+  addTodo: (todo: newTodo) => any;
 }
 
 export interface HeaderState {

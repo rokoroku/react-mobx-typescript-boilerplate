@@ -1,6 +1,6 @@
 import * as React from 'react';
-import * as classNames from 'classnames';
-import * as style from './style.css';
+import classNames from 'classnames';
+import style from './TodoTextInput.module.css';
 
 export interface TodoTextInputProps {
   text?: string;
@@ -18,14 +18,14 @@ export class TodoTextInput extends React.Component<
   TodoTextInputProps,
   TodoTextInputState
 > {
-  constructor(props?: TodoTextInputProps, context?: any) {
+  constructor(props: TodoTextInputProps, context?: any) {
     super(props, context);
     this.state = {
       text: this.props.text || ''
     };
   }
 
-  private handleSubmit = (e) => {
+  private handleSubmit = (e: any) => {
     const text = e.target.value.trim();
     if (e.which === 13) {
       this.props.onSave(text);
@@ -35,11 +35,11 @@ export class TodoTextInput extends React.Component<
     }
   };
 
-  private handleChange = (e) => {
+  private handleChange = (e: any) => {
     this.setState({ text: e.target.value });
   };
 
-  private handleBlur = (e) => {
+  private handleBlur = (e: any) => {
     const text = e.target.value.trim();
     if (!this.props.newTodo) {
       this.props.onSave(text);

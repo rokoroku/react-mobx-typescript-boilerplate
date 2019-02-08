@@ -1,8 +1,8 @@
 import * as React from 'react';
-import * as classNames from 'classnames';
-import { TodoTextInput } from 'app/components/TodoTextInput';
-import { TodoModel } from 'app/models/TodoModel';
-import * as style from './style.css';
+import classNames from 'classnames';
+import { TodoTextInput } from '../../components/TodoTextInput';
+import { TodoModel } from '../../models/TodoModel';
+import style from './TodoItem.module.css';
 
 export interface TodoActions {
   editTodo: (id: number, data: Partial<TodoModel>) => any;
@@ -18,7 +18,7 @@ export interface TodoState {
 }
 
 export class TodoItem extends React.Component<TodoProps, TodoState> {
-  constructor(props?: TodoProps, context?: any) {
+  constructor(props: TodoProps, context?: any) {
     super(props, context);
     this.state = { editing: false };
   }

@@ -1,11 +1,11 @@
 import * as React from 'react';
-import * as classNames from 'classnames';
-import * as style from './style.css';
+import classNames from 'classnames';
+import style from './Footer.module.css';
 import {
   TodoFilter,
   TODO_FILTER_TITLES,
   TODO_FILTER_TYPES
-} from 'app/constants';
+} from '../../constants';
 
 export interface FooterProps {
   filter: TodoFilter;
