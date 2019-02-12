@@ -1,9 +1,9 @@
-describe("Delete Todo", () => {
+describe("Delete Todo", function () {
     before(() => {
         cy.visit("/");
     });
 
-    it("should delete a todo", () => {
+    it("should delete a todo", function () {
         cy.get('body')
             .should('contain', 'Todos')
             .type('Use Mobx');
@@ -16,9 +16,6 @@ describe("Delete Todo", () => {
             .click();
 
         cy.get('body')
-            .should('not.contain', 'Use Mobx')
+            .should('not.contain', 'Use Mobx');
     });
-
-
-
 });
