@@ -1,4 +1,4 @@
-# Frontend Boilerplate with React, MobX, TypeScript, CircleCI, Greenkeeper
+# TODO App with React, MobX, TypeScript, CircleCI, Greenkeeper
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/zerdos/react-mobx-typescript-boilerplate.svg)](https://greenkeeper.io/)
 [![CircleCI](https://circleci.com/gh/zerdos/react-mobx-typescript-boilerplate.svg?style=svg)](https://circleci.com/gh/zerdos/react-mobx-typescript-boilerplate)
