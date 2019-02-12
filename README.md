@@ -17,6 +17,7 @@ Keep updating, feel to send PR-s, or open issues with your ideas.
 - [x] [Cypress tests](https://www.cypress.io/)
 - [x] [CircleCI continious integration](https://circleci.com/)
 - [x] [Cypress tests](https://www.cypress.io/)
+- [x] [Cypress Dashboard test videos](https://dashboard.cypress.io/#/projects/bi4amy/runs)
 - [x] [Greenkeeper - keeping your dependencies fresh](https://greenkeeper.io/)
 
 # License
