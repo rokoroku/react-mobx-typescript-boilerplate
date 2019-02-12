@@ -1,9 +1,11 @@
-# TODO App with React, MobX, TypeScript, CircleCI, Greenkeeper
+# TODO with React, MobX, TypeScript, CircleCI, Greenkeeper
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/zerdos/react-mobx-typescript-boilerplate.svg)](https://greenkeeper.io/)
 [![CircleCI](https://circleci.com/gh/zerdos/react-mobx-typescript-boilerplate.svg?style=svg)](https://circleci.com/gh/zerdos/react-mobx-typescript-boilerplate)
 
-TODO example app - using modern tools.
+TODO example - using modern tools.
+
+Keep updating, feel to send PR-s, or open issues with your ideas.
 
 ## Contains
 
