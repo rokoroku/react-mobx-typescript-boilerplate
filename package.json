@@ -9,7 +9,7 @@
     "start:dev": "react-scripts start",
     "start:test": "cypress open",
     "test": "start-server-and-test start:dev http://localhost:3000 test:cy",
-    "test:cy": "cypress run",
+    "test:cy": "cypress run --record",
     "test:unit": "react-scripts test",
     "build": "react-scripts build",
     "prettier": "prettier --write \"src/**/*.{ts,tsx,css}\""
