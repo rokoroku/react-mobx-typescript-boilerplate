@@ -5,7 +5,7 @@ import { RouteComponentProps } from 'react-router';
 import { Header } from '../../components/Header';
 import { TodoList } from '../../components/TodoList';
 import { Footer } from '../../components/Footer';
-import { TodoStore, RouterStore } from '../..//stores';
+import { TodoStore, RouterStore } from '../../stores';
 import {
   STORE_TODO,
   STORE_ROUTER,

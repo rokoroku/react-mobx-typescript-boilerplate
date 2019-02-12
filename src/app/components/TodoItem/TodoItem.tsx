@@ -4,16 +4,16 @@ import { TodoTextInput } from '../../components/TodoTextInput';
 import { TodoModel } from '../../models/TodoModel';
 import style from './TodoItem.module.css';
 
-export interface TodoActions {
+interface TodoActions {
   editTodo: (id: number, data: Partial<TodoModel>) => any;
   deleteTodo: (id: number) => any;
 }
 
-export interface TodoProps extends TodoActions {
+interface TodoProps extends TodoActions {
   todo: TodoModel;
 }
 
-export interface TodoState {
+interface TodoState {
   editing: boolean;
 }
 
@@ -56,6 +56,7 @@ export class TodoItem extends React.Component<TodoProps, TodoState> {
 
   render() {
     const { todo } = this.props;
+    const {id} = todo;
 
     const element = this.state.editing ? (
       <TodoTextInput
@@ -75,6 +76,7 @@ export class TodoItem extends React.Component<TodoProps, TodoState> {
         <label onDoubleClick={this.handleDoubleClick}>{todo.text}</label>
 
         <button
+          data-testid={`delete-button-${id}`}
           className={style.destroy}
           onClick={this.handleClickDeleteButton}
         />
@@ -90,5 +92,3 @@ export class TodoItem extends React.Component<TodoProps, TodoState> {
     return <li className={classes}>{element}</li>;
   }
 }
-
-export default TodoItem;

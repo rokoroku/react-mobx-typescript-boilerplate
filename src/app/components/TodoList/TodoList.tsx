@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { TodoItem, TodoActions } from '../../components/TodoItem';
+import { TodoItem } from '../../components/TodoItem';
 import { TodoModel } from '../..//models/TodoModel';
 import style from './TodoList.module.css';
 
-export interface TodoListProps extends TodoActions {
+export interface TodoListProps {
   todos: TodoModel[];
+  deleteTodo: (id: number)=> void;
+  editTodo: (id: number, data: Partial<TodoModel>)=> void;
   completeAll: () => any;
 }
 
