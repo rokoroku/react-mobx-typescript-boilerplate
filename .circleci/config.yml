@@ -6,5 +6,12 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - run: yarn
+      - restore_cache:
+          keys:
+            - node_modules-{{ arch }}-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - run: yarn install --frozen-lockfile
+      - save_cache:
+          key: node_modules-{{ arch }}-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/repo/node_modules
       - run: yarn test
