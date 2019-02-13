@@ -12,7 +12,7 @@
     "test:cy": "cypress run --record",
     "test:unit": "react-scripts test",
     "build": "react-scripts build",
-    "prettier": "prettier --write \"**/*.{ts,tsx,css,js,scss,html,yml,md}\""
+    "run:prettier": "prettier --write \"**/*.{ts,tsx,css,js,scss,html,yml,md,json}\""
   },
   "license": "MIT",
   "devDependencies": {
@@ -51,7 +51,10 @@
     }
   },
   "lint-staged": {
-    "*.{ts,tsx,css,js,scss,html,yml,md}": "prettier"
+    "*.{ts,tsx,css,js,scss,html,yml,md,json}": [
+      "yarn run run:prettier",
+      "git add"
+    ]
   },
   "browserslist": [
     ">0.2%",

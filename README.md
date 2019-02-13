@@ -9,8 +9,9 @@ Keep updating, feel to send PR-s, or open issues with your ideas.
 
 ## Contains
 
-- [x] [Create React App. Not ejected.](https://github.com/facebook/create-react-app) 
-- [x] [Mobx](https://github.com/mobxjs/mobx) 
+- [x] [Create React App. Not ejected.](https://github.com/facebook/create-react-app)
+- [x] [Typescript](https://www.typescriptlang.org)
+- [x] [Mobx](https://github.com/mobxjs/mobx)
 - [x] [Mobx React](https://github.com/mobxjs/mobx-react)
 - [x] [Mobx React Router](https://github.com/alisd23/mobx-react-router/)
 - [x] [TodoMVC](http://todomvc.com)
@@ -21,7 +22,7 @@ Keep updating, feel to send PR-s, or open issues with your ideas.
 - [x] [Greenkeeper - keeping your dependencies fresh](https://greenkeeper.io/)
 - [x] [Prettier - {ts,tsx,css,js,scss,html,yml,md}](https://prettier.io/)
 - [x] [Husky git hooks - precommit, runs prettier](https://github.com/typicode/husky)
-- [x] [Lint-staged -  Run linters on just on git staged files](https://github.com/okonet/lint-staged)
+- [x] [Lint-staged - Run linters on just on git staged files](https://github.com/okonet/lint-staged)
 
 # License
 
