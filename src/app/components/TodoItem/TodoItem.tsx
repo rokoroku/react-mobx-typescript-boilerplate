@@ -56,7 +56,7 @@ export class TodoItem extends React.Component<TodoProps, TodoState> {
 
   render() {
     const { todo } = this.props;
-    const {id} = todo;
+    const { id } = todo;
 
     const element = this.state.editing ? (
       <TodoTextInput

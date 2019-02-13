@@ -5,8 +5,8 @@ import style from './TodoList.module.css';
 
 export interface TodoListProps {
   todos: TodoModel[];
-  deleteTodo: (id: number)=> void;
-  editTodo: (id: number, data: Partial<TodoModel>)=> void;
+  deleteTodo: (id: number) => void;
+  editTodo: (id: number, data: Partial<TodoModel>) => void;
   completeAll: () => any;
 }
 
