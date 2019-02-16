@@ -1,6 +1,12 @@
 import { observable } from 'mobx';
 
-export class TodoModel {
+export interface ITodoModel {
+  id: number;
+  text: string;
+  completed: boolean;
+}
+
+export class TodoModel implements ITodoModel {
   readonly id: number;
   @observable public text: string;
   @observable public completed: boolean;
