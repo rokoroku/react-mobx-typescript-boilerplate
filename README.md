@@ -2,7 +2,6 @@
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/zerdos/react-mobx-typescript-boilerplate.svg)](https://greenkeeper.io/)
 [![CircleCI](https://circleci.com/gh/zerdos/react-mobx-typescript-boilerplate.svg?style=svg)](https://circleci.com/gh/zerdos/react-mobx-typescript-boilerplate)
-[![](https://codescene.io/projects/4170/status.svg) Get more details at **codescene.io**.](https://codescene.io/projects/4170/jobs/latest-successful/results)
 
 TODO example - using modern tools.
 
