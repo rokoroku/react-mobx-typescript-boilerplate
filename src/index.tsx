@@ -18,7 +18,7 @@ const rootStore = createStores(history, defaultTodos);
 
 // render react DOM
 ReactDOM.render(
-  <Provider routerStore={rootStore.routerStore} todoStore={rootStore.todoStore}>
+  <Provider {...rootStore}>
     <App />
   </Provider>,
   document.getElementById('root')
