@@ -18,9 +18,9 @@
   "devDependencies": {
     "@types/classnames": "^2.2.7",
     "@types/history": "^4.7.2",
-    "@types/jest": "24.0.5",
-    "@types/node": "11.9.4",
-    "@types/react": "16.8.3",
+    "@types/jest": "24.0.6",
+    "@types/node": "11.9.5",
+    "@types/react": "16.8.4",
     "@types/react-dom": "16.8.2",
     "classnames": "^2.2.6",
     "cypress": "^3.1.5",
@@ -37,8 +37,8 @@
     "mobx": "^5.9.0",
     "mobx-react": "^5.4.3",
     "mobx-react-router": "^4.0.5",
-    "react": "^16.8.2",
-    "react-dom": "^16.8.2",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.5"
   },
