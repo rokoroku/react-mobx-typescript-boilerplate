@@ -29,7 +29,7 @@
     "mobx-react-devtools": "^6.0.3",
     "prettier": "^1.16.4",
     "start-server-and-test": "^1.7.11",
-    "typescript": "3.3.3"
+    "typescript": "3.3.3333"
   },
   "dependencies": {
     "@types/react-router-dom": "^4.3.1",
