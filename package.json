@@ -39,7 +39,7 @@
     "mobx-react-router": "^4.0.5",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
-    "react-router-dom": "^4.3.1",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8"
   },
   "eslintConfig": {
