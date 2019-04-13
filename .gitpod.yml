@@ -1,0 +1,6 @@
+image:
+  file: Dockerfile
+ports:
+- port: 3000
+tasks:
+- command: bash -c "yarn && yarn start:dev"
