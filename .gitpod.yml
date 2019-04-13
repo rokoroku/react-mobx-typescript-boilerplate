@@ -5,3 +5,4 @@ ports:
 tasks:
 - command: bash -c "yarn start:dev"
 - command: bash -c "yarn unit"
+workspaceLocation: /app/
