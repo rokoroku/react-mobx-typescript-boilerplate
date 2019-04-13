@@ -3,5 +3,5 @@ image:
 ports:
 - port: 3000
 tasks:
-- command: bash -c "mv /home/gitpod/node_modules . && yarn && yarn start:dev"
-- command: yarn unit
+- command: bash -c "yarn start:dev"
+- command: bash -c "yarn unit"
