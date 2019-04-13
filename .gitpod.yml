@@ -1,8 +1,8 @@
 image:
   file: Dockerfile
 ports:
-- port: 3000
+  - port: 3000
 tasks:
-- command: bash -c "yarn start:dev"
-- command: bash -c "yarn unit"
-workspaceLocation: /app/
+  - command: bash -c "yarn start:dev"
+  - command: bash -c "yarn unit"
+workspaceLocation: /home/gitpod/
