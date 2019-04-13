@@ -3,6 +3,5 @@ image:
 ports:
   - port: 3000
 tasks:
-  - command: bash -c "yarn start:dev"
-  - command: bash -c "yarn unit"
-workspaceLocation: /home/gitpod/
+  - command: bash -c "mv /home/gitpod/node_modules . && yarn start:dev"
+  - command: bash -c "sleep 0.5 && yarn unit"
