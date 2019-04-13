@@ -8,6 +8,7 @@
     "start": "start-server-and-test start:dev http://localhost:3000 start:test",
     "start:dev": "react-scripts start",
     "start:test": "cypress open",
+    "unit": "jest --watch",
     "test": "start-server-and-test start:dev http://localhost:3000 test:cy",
     "test:cy": "cypress run --record",
     "test:unit": "react-scripts test",
@@ -29,6 +30,7 @@
     "mobx-react-devtools": "^6.1.1",
     "prettier": "^1.17.0",
     "start-server-and-test": "^1.7.13",
+    "ts-jest": "^24.0.2",
     "typescript": "3.4.3"
   },
   "dependencies": {
