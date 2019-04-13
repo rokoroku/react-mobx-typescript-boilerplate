@@ -3,4 +3,4 @@ image:
 ports:
 - port: 3000
 tasks:
-- command: bash -c "yarn && yarn start:dev"
+- command: bash -c "mv /home/gitpods . && yarn && yarn start:dev"
