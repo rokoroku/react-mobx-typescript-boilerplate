@@ -8,7 +8,7 @@ import { App } from './app';
 
 // default fixtures for TodoStore
 const defaultTodos = [
-  new TodoModel('Use Mobx'),
+  new TodoModel('Use Gipods'),
   new TodoModel('Use React', true)
 ];
 
