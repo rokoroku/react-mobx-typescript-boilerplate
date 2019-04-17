@@ -4,4 +4,4 @@ ports:
   - port: 3000
 tasks:
   - command: bash -c "mv /home/gitpod/node_modules . && yarn start:dev"
-  - command: bash -c "npx server-test 3000 unit"
+  - command: bash -c "sleep 5 && yarn unit"
