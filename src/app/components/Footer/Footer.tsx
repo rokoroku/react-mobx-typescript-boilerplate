@@ -39,13 +39,13 @@ export class Footer extends React.Component<FooterProps, FooterState> {
     });
 
     return (
-      <a
+      <button
         className={className}
         style={{ cursor: 'pointer' }}
         onClick={() => onChangeFilter(filter)}
       >
         {title}
-      </a>
+      </button>
     );
   }
 

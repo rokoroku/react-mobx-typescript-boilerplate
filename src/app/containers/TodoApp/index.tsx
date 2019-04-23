@@ -44,7 +44,6 @@ export class TodoApp extends React.Component<TodoAppProps, TodoAppState> {
   }
 
   private handleFilter = (filter: TodoFilter) => {
-    const props = this.props;
     const { routerStore } = this.props;
     const currentHash = routerStore.location.hash;
     const nextHash = TODO_FILTER_LOCATION_HASH[filter];

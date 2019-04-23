@@ -20,8 +20,8 @@
     "@types/classnames": "^2.2.7",
     "@types/history": "^4.7.2",
     "@types/jest": "24.0.11",
-    "@types/node": "11.13.4",
-    "@types/react": "16.8.13",
+    "@types/node": "11.13.7",
+    "@types/react": "16.8.14",
     "@types/react-dom": "16.8.4",
     "classnames": "^2.2.6",
     "cypress": "^3.2.0",
@@ -31,7 +31,7 @@
     "prettier": "^1.17.0",
     "start-server-and-test": "^1.7.13",
     "ts-jest": "^24.0.2",
-    "typescript": "3.4.3"
+    "typescript": "3.4.4"
   },
   "dependencies": {
     "@types/react-router-dom": "^4.3.2",
@@ -42,7 +42,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8"
+    "react-scripts": "3.0.0"
   },
   "eslintConfig": {
     "extends": "react-app"

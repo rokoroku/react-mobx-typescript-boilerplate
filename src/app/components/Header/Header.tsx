@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { TodoTextInput } from '../../components/TodoTextInput';
-import { TodoModel } from '../../models/TodoModel';
-import { string } from 'prop-types';
 
 interface newTodo {
   text: string;

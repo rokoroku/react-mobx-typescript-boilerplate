@@ -13,10 +13,6 @@ export interface TodoListProps {
 export interface TodoListState {}
 
 export class TodoList extends React.Component<TodoListProps, TodoListState> {
-  constructor(props: TodoListProps, context?: any) {
-    super(props, context);
-  }
-
   private handleToggleAll = (e: React.SyntheticEvent<any>) => {
     e.preventDefault();
     this.props.completeAll();
