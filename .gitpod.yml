@@ -1,9 +1,10 @@
 image: gitpod/workspace-full
 ports:
   - port: 3000
-    onOpen: open-preview
+    onOpen: open-browser
 tasks:
-  - prebuild: bash -c "CYPRESS_INSTALL_BINARY=0 yarn install --frozen-lockfile && exit"
+  - prebuild: bash -c "CYPRESS_INSTALL_BINARY=0 yarn install --frozen-lockfile"
+    command: exit
   - command: yarn start:dev
     openMode: split-right
   - command: yarn unit
