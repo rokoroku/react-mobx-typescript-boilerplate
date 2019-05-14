@@ -1,10 +1,9 @@
-image:
-  file: .gitpod.dockerfile
+image: gitpod/workspace-full
 ports:
   - port: 3000
     onOpen: open-preview
 tasks:
-  - prebuild: mv /home/gitpod/node_modules . && exit
+  - prebuild: yarn install --frozen-lockfile
   - command: yarn start:dev
     openMode: split-bottom
   - command: yarn unit
