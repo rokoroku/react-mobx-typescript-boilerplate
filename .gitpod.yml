@@ -4,6 +4,7 @@ ports:
     onOpen: open-browser
 tasks:
   - prebuild: bash -c "CYPRESS_INSTALL_BINARY=0 yarn install --frozen-lockfile"
+    before: exit
     command: exit
   - command: yarn start:dev
     openMode: split-right
