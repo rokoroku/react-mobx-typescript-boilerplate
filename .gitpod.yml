@@ -1,7 +1,9 @@
 image:
-  file: Dockerfile
+  file: .gitpod.dockerfile
 ports:
   - port: 3000
+    onOpen: open-preview
 tasks:
-  - command: bash -c "mv /home/gitpod/node_modules . && yarn start:dev"
-  - command: bash -c "sleep 5 && yarn unit"
+  - init: mv /home/gitpod/node_modules
+    command: yarn start:dev
+  - command: yarn unit
