@@ -5,7 +5,7 @@ ports:
 tasks:
   - prebuild: bash -c "CYPRESS_INSTALL_BINARY=0 yarn install --frozen-lockfile"
     before: exit
-    command: exit
+    init: exit
   - command: yarn start:dev
     openMode: split-right
   - command: yarn unit
