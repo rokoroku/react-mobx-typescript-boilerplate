@@ -4,5 +4,6 @@ ports:
   - port: 3000
     onOpen: open-preview
 tasks:
-  - init: mv /home/gitpod/node_modules .
-    command: yarn start:dev
+  - prebuild: mv /home/gitpod/node_modules .
+  - command: yarn start:dev
+  - command: yarn unit
