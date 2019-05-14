@@ -3,8 +3,8 @@ ports:
   - port: 3000
     onOpen: open-preview
 tasks:
-  - prebuild: yarn install --frozen-lockfile
+  - prebuild: yarn install --frozen-lockfile && exit
   - command: yarn start:dev
-    openMode: split-bottom
+    openMode: split-left
   - command: yarn unit
-    openMode: split-bottom
+    openMode: split-right
