@@ -20,7 +20,6 @@ export const TodoContainer = observer(() => {
 
   // location change callback
   React.useEffect(() => {
-    console.log('effect');
     const nextFilter = Object.keys(TODO_FILTER_LOCATION_HASH)
       .map((key) => Number(key) as TodoFilter)
       .find((item) => TODO_FILTER_LOCATION_HASH[item] === location.hash);
