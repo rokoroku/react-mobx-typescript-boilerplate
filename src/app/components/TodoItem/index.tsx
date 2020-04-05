@@ -84,7 +84,7 @@ export class TodoItem extends React.Component<TodoProps, TodoState> {
     const classes = classNames({
       [style.completed]: todo.completed,
       [style.editing]: this.state.editing,
-      [style.normal]: !this.state.editing
+      [style.normal]: !this.state.editing,
     });
 
     return <li className={classes}>{element}</li>;

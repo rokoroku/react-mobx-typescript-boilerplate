@@ -4,7 +4,7 @@ import * as style from './style.css';
 import {
   TodoFilter,
   TODO_FILTER_TITLES,
-  TODO_FILTER_TYPES
+  TODO_FILTER_TYPES,
 } from 'app/constants';
 
 export interface FooterProps {
@@ -35,7 +35,7 @@ export class Footer extends React.Component<FooterProps, FooterState> {
     const title = TODO_FILTER_TITLES[filter];
     const { filter: selectedFilter, onChangeFilter } = this.props;
     const className = classNames({
-      [style.selected]: filter === selectedFilter
+      [style.selected]: filter === selectedFilter,
     });
 
     return (

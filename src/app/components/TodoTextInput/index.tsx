@@ -21,7 +21,7 @@ export class TodoTextInput extends React.Component<
   constructor(props?: TodoTextInputProps, context?: any) {
     super(props, context);
     this.state = {
-      text: this.props.text || ''
+      text: this.props.text || '',
     };
   }
 
@@ -50,7 +50,7 @@ export class TodoTextInput extends React.Component<
     const classes = classNames(
       {
         [style.edit]: this.props.editing,
-        [style.new]: this.props.newTodo
+        [style.new]: this.props.newTodo,
       },
       style.normal
     );
