@@ -17,7 +17,7 @@ const cssModuleLoader = {
   options: {
     modules: true,
     importLoaders: 2,
-    sourceMap: false // turned off as causes delay
+    sourceMap: true
   }
 };
 // For our normal CSS files we would like them globally scoped
@@ -26,7 +26,7 @@ const cssLoader = {
   options: {
     modules: 'global',
     importLoaders: 2,
-    sourceMap: false // turned off as causes delay
+    sourceMap: true
   }
 };
 // To avoid duplicate definition
@@ -51,7 +51,7 @@ const postCSSLoader = {
       ]
     }
   }
-}
+};
 
 module.exports = {
   context: sourcePath,
@@ -60,8 +60,9 @@ module.exports = {
   },
   output: {
     path: outPath,
-    filename: isDeployedApp ? '[contenthash].js' : '[fullhash].js',
-    chunkFilename: isDeployedApp ? '[name].[contenthash].js' : '[name].[fullhash].js'
+    filename: isDeployedApp ? 'bundle.[name].[contenthash].js' : 'bundle.[name].[fullhash].js',
+    chunkFilename: isDeployedApp ? 'chunk.[id].[contenthash].js' : 'chunk.[id].[fullhash].js',
+    assetModuleFilename: isDeployedApp ? '[contenthash][ext][query]' : '[fullhash][ext][query]'
   },
   target: 'web',
   resolve: {
@@ -138,18 +139,17 @@ module.exports = {
       }
     ]
   },
-  // optimization: {
-  //   splitChunks: {
-  //     chunks: 'all',
-  //     cacheGroups: {
-  //       vendors: {
-  //         test: /[\\/]node_modules[\\/]/,
-  //         name: isDeployedApp ? 'vendor.[contenthash].js' : 'vendor.[fullhash].js'
-  //       }
-  //     }
-  //   },
-  //   runtimeChunk: 'single'
-  // },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/
+        }
+      }
+    },
+    minimize: true
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': JSON.stringify(dotenv.parsed)
