@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import * as style from './style.css';
+import style from './style.module.css';
 import {
   TodoFilter,
   TODO_FILTER_TITLES,
@@ -34,7 +34,7 @@ export class Footer extends React.Component<FooterProps, FooterState> {
   renderFilterLink(filter: TodoFilter) {
     const title = TODO_FILTER_TITLES[filter];
     const { filter: selectedFilter, onChangeFilter } = this.props;
-    const className = classNames({
+    const className = classNames.default({
       [style.selected]: filter === selectedFilter
     });
 

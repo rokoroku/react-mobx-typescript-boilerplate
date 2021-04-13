@@ -1,16 +1,57 @@
-var webpack = require('webpack');
-var path = require('path');
+let webpack = require('webpack');
+let path = require('path');
 
 // variables
-var isProduction =
-  process.argv.indexOf('-p') >= 0 || process.env.NODE_ENV === 'production';
-var sourcePath = path.join(__dirname, './src');
-var outPath = path.join(__dirname, './build');
+let dotenv = require('dotenv').config({ path: __dirname + '/.env' });
+let sourcePath = path.join(__dirname, './src');
+let outPath = path.join(__dirname, './build');
+let isDeployedApp = (process.env.REACT_APP_ENVIRONMENT === 'staging' || process.env.REACT_APP_ENVIRONMENT === 'production');
 
 // plugins
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var MiniCssExtractPlugin = require('mini-css-extract-plugin');
-var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
+let MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+// For our css modules these will be locally scoped
+const cssModuleLoader = {
+  loader: 'css-loader',
+  options: {
+    modules: true,
+    importLoaders: 2,
+    sourceMap: false // turned off as causes delay
+  }
+};
+// For our normal CSS files we would like them globally scoped
+const cssLoader = {
+  loader: 'css-loader',
+  options: {
+    modules: 'global',
+    importLoaders: 2,
+    sourceMap: false // turned off as causes delay
+  }
+};
+// To avoid duplicate definition
+const styleLoader = isDeployedApp ? {
+  loader: MiniCssExtractPlugin.loader,
+  options: {
+    esModule: false
+  }
+} : 'style-loader';
+const postCSSLoader = {
+  loader: 'postcss-loader',
+  options: {
+    postcssOptions: {
+      ident: 'postcss',
+      plugins: [
+        require('postcss-import')({ addDependencyTo: webpack }),
+        require('postcss-url')(),
+        require('postcss-reporter')(),
+        require('postcss-browser-reporter')({
+          disabled: isDeployedApp
+        })
+      ]
+    }
+  }
+}
 
 module.exports = {
   context: sourcePath,
@@ -19,104 +60,102 @@ module.exports = {
   },
   output: {
     path: outPath,
-    filename: isProduction ? '[contenthash].js' : '[hash].js',
-    chunkFilename: isProduction ? '[name].[contenthash].js' : '[name].[hash].js'
+    filename: isDeployedApp ? '[contenthash].js' : '[fullhash].js',
+    chunkFilename: isDeployedApp ? '[name].[contenthash].js' : '[name].[fullhash].js'
   },
   target: 'web',
   resolve: {
-    extensions: ['.js', '.ts', '.tsx'],
+    extensions: ['.js', '.ts', '.tsx', '.css'],
     // Fix webpack's default behavior to not load packages with jsnext:main module
     // (jsnext:main directs not usually distributable es6 format, but es6 sources)
     mainFields: ['module', 'browser', 'main'],
     alias: {
-      app: path.resolve(__dirname, 'src/app/')
+      app: path.resolve(__dirname, 'src/app/'),
+      assets: path.resolve(__dirname, 'src/assets/')
     }
   },
   module: {
     rules: [
-      // .ts, .tsx
+      /*
+       * Typsecript files.
+       */
       {
-        test: /\.tsx?$/,
+        test: /\.ts(x?)$/,
+        exclude: /node_modules/,
         use: [
-          !isProduction && {
+          !isDeployedApp && {
             loader: 'babel-loader',
             options: { plugins: ['react-hot-loader/babel'] }
           },
           'ts-loader'
         ].filter(Boolean)
       },
-      // css
+      /*
+      * JavaScript files.
+      */
       {
-        test: /\.css$/,
+        enforce: 'pre',
+        test: /\.js$/,
+        loader: 'source-map-loader'
+      },
+      /*
+      * CSS Files.
+      */
+      {
+        test: /\.(sa|sc|c)ss$/,
+        exclude: /\.module\.(sa|sc|c)ss$/,
         use: [
-          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
-          {
-            loader: 'css-loader',
-            query: {
-              modules: true,
-              sourceMap: !isProduction,
-              importLoaders: 1,
-              localIdentName: isProduction
-                ? '[hash:base64:5]'
-                : '[local]__[hash:base64:5]'
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              plugins: [
-                require('postcss-import')({ addDependencyTo: webpack }),
-                require('postcss-url')(),
-                require('postcss-preset-env')({
-                  /* use stage 2 features (defaults) */
-                  stage: 2
-                }),
-                require('postcss-reporter')(),
-                require('postcss-browser-reporter')({
-                  disabled: isProduction
-                })
-              ]
-            }
-          }
+          styleLoader,
+          cssLoader,
+          postCSSLoader
         ]
       },
-      // static assets
-      { test: /\.html$/, use: 'html-loader' },
-      { test: /\.(a?png|svg)$/, use: 'url-loader?limit=10000' },
       {
-        test: /\.(jpe?g|gif|bmp|mp3|mp4|ogg|wav|eot|ttf|woff|woff2)$/,
-        use: 'file-loader'
+        test: /\.module\.(sa|sc|c)ss$/,
+        use: [
+          styleLoader,
+          cssModuleLoader,
+          postCSSLoader
+        ]
+      },
+      /*
+      * misc Files.
+      */
+      {
+        test: /\.html$/,
+        loader: 'html-loader'
+      },
+      {
+        test: /\.(bmp|mp3|mp4|ogg|wav|eot|ttf|woff|woff2)$/,
+        loader: 'file-loader'
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif)$/,
+        loader: 'file-loader',
+        options: {
+          esModule: false
+        }
       }
     ]
   },
-  optimization: {
-    splitChunks: {
-      name: true,
-      cacheGroups: {
-        commons: {
-          chunks: 'initial',
-          minChunks: 2
-        },
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          chunks: 'all',
-          priority: -10,
-          filename: isProduction ? 'vendor.[contenthash].js' : 'vendor.[hash].js'
-        }
-      }
-    },
-    runtimeChunk: true
-  },
+  // optimization: {
+  //   splitChunks: {
+  //     chunks: 'all',
+  //     cacheGroups: {
+  //       vendors: {
+  //         test: /[\\/]node_modules[\\/]/,
+  //         name: isDeployedApp ? 'vendor.[contenthash].js' : 'vendor.[fullhash].js'
+  //       }
+  //     }
+  //   },
+  //   runtimeChunk: 'single'
+  // },
   plugins: [
-    new webpack.EnvironmentPlugin({
-      NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined
-      DEBUG: false
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(dotenv.parsed)
     }),
-    new WebpackCleanupPlugin(),
     new MiniCssExtractPlugin({
-      filename: isProduction ? '[contenthash].css' : '[hash].css',
-      disable: !isProduction
+      filename: isDeployedApp ? 'styles.[contenthash].css' : 'styles.[fullhash].css'
     }),
     new HtmlWebpackPlugin({
       template: 'assets/index.html'
@@ -133,11 +172,5 @@ module.exports = {
     clientLogLevel: 'warning'
   },
   // https://webpack.js.org/configuration/devtool/
-  devtool: isProduction ? 'hidden-source-map' : 'cheap-module-eval-source-map',
-  node: {
-    // workaround for webpack-dev-server issue
-    // https://github.com/webpack/webpack-dev-server/issues/60#issuecomment-103411179
-    fs: 'empty',
-    net: 'empty'
-  }
+  devtool: isDeployedApp ? 'hidden-source-map' : 'eval-cheap-module-source-map'
 };

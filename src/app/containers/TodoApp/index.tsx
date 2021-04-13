@@ -1,7 +1,7 @@
 import * as React from 'react';
-import * as style from './style.css';
+import style from './style.module.css';
 import { inject, observer } from 'mobx-react';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import { Header } from 'app/components/Header';
 import { TodoList } from 'app/components/TodoList';
 import { Footer } from 'app/components/Footer';
@@ -87,7 +87,7 @@ export class TodoApp extends React.Component<TodoAppProps, TodoAppState> {
     );
 
     return (
-      <div className={style.normal}>
+      <div className={`${style.normal} todo-default-background`}>
         <Header addTodo={todoStore.addTodo} />
         <TodoList
           todos={filteredTodos}

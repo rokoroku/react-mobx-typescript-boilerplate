@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TodoItem, TodoActions } from 'app/components/TodoItem';
 import { TodoModel } from 'app/models/TodoModel';
-import * as style from './style.css';
+import style from './style.module.css';
 
 export interface TodoListProps extends TodoActions {
   todos: TodoModel[];
@@ -40,7 +40,7 @@ export class TodoList extends React.Component<TodoListProps, TodoListState> {
     return (
       <section className={style.main}>
         {this.renderToggleAll()}
-        <ul className={style.normal}>
+        <ul className={`${style.normal}`}>
           {todos.map((todo) => (
             <TodoItem key={todo.id} todo={todo} {...actions} />
           ))}

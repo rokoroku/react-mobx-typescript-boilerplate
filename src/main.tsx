@@ -3,8 +3,9 @@ import * as ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
 import { createBrowserHistory } from 'history';
 import { TodoModel } from 'app/models';
-import { createStores } from 'app/stores';
-import { App } from 'app';
+import {RootStores} from 'app/stores';
+import { NewApp } from 'app';
+import "./assets/global.css";
 
 // default fixtures for TodoStore
 const defaultTodos = [
@@ -14,12 +15,14 @@ const defaultTodos = [
 
 // prepare MobX stores
 const history = createBrowserHistory();
-const rootStore = createStores(history, defaultTodos);
+export const stores = new RootStores(history, defaultTodos).getStoresInstances();
 
-// render react DOM
+// prepare App
+const App = NewApp(history)
+
 ReactDOM.render(
-  <Provider {...rootStore}>
-    <App history={history} />
+  <Provider {...stores}>
+    <App/>
   </Provider>,
   document.getElementById('root')
 );

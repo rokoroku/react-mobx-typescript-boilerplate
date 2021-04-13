@@ -1,8 +1,18 @@
 import * as React from 'react';
+import { config } from 'app/config/config';
+import { APP_ENVIRONMENT } from 'app/constants';
 
-export class Root extends React.Component<any, any> {
+export interface RootProps {
+
+}
+
+export interface RootState {
+  /* empty */
+}
+
+export class Root extends React.Component<RootProps, RootState> {
   renderDevTool() {
-    if (process.env.NODE_ENV !== 'production') {
+    if (config.environment === APP_ENVIRONMENT.Local) {
       const DevTools = require('mobx-react-devtools').default;
       return <DevTools />;
     }

@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import { TodoTextInput } from 'app/components/TodoTextInput';
 import { TodoModel } from 'app/models/TodoModel';
-import * as style from './style.css';
+import style from './style.module.css';
 
 export interface TodoActions {
   editTodo: (id: number, data: Partial<TodoModel>) => any;
@@ -81,7 +81,7 @@ export class TodoItem extends React.Component<TodoProps, TodoState> {
       </div>
     );
 
-    const classes = classNames({
+    const classes = classNames.default({
       [style.completed]: todo.completed,
       [style.editing]: this.state.editing,
       [style.normal]: !this.state.editing

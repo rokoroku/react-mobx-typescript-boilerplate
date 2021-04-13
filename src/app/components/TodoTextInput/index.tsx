@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import * as style from './style.css';
+import style from './style.module.css';
 
 export interface TodoTextInputProps {
   text?: string;
@@ -47,7 +47,7 @@ export class TodoTextInput extends React.Component<
   };
 
   render() {
-    const classes = classNames(
+    const classes = classNames.default(
       {
         [style.edit]: this.props.editing,
         [style.new]: this.props.newTodo
