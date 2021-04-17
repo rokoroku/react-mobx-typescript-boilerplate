@@ -1,12 +1,16 @@
-import { observable, computed, action } from 'mobx';
+import { action, computed, makeAutoObservable, observable } from 'mobx';
 import { TodoModel } from 'app/models';
+import { persistence, StorageAdapter } from 'mobx-persist-store';
+import { PersistenceStore } from 'mobx-persist-store/lib/types';
+import { readStore, writeStore } from 'app/stores/persistence';
 
 export class TodoStore {
-  constructor(fixtures: TodoModel[]) {
-    this.todos = fixtures;
-  }
 
-  @observable public todos: Array<TodoModel>;
+  @observable public todos: TodoModel[] = [];
+
+  constructor() {
+    makeAutoObservable(this);
+  }
 
   @computed
   get activeTodos() {
@@ -20,6 +24,7 @@ export class TodoStore {
 
   @action
   addTodo = (item: Partial<TodoModel>): void => {
+    console.log(item);
     this.todos.push(new TodoModel(item.text, item.completed));
   };
 
@@ -54,4 +59,17 @@ export class TodoStore {
   };
 }
 
-export default TodoStore;
+export function NewStore(): PersistenceStore<TodoStore> {
+  return persistence({
+    name: 'TodoStore',
+    properties: ['todos'],
+    adapter: new StorageAdapter({
+      read: readStore,
+      write: writeStore
+    }),
+    reactionOptions: {
+      // optional
+      delay: 200
+    }
+  })(new TodoStore());
+}
