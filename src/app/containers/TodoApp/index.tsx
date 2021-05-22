@@ -76,18 +76,20 @@ export class TodoApp extends React.Component<TodoAppProps, TodoAppState> {
     const { filter } = this.state;
     const filteredTodos = this.getFilteredTodo(filter);
 
-    const footer = todoStore.todos.length && (
-      <Footer
-        filter={filter}
-        activeCount={todoStore.activeTodos.length}
-        completedCount={todoStore.completedTodos.length}
-        onClearCompleted={todoStore.clearCompleted}
-        onChangeFilter={this.handleFilter}
-      />
-    );
+    let footer = null;
+    if (todoStore.todos.length > 0) {
+      footer = (<Footer
+          filter={filter}
+          activeCount={todoStore.activeTodos.length}
+          completedCount={todoStore.completedTodos.length}
+          onClearCompleted={todoStore.clearCompleted}
+          onChangeFilter={this.handleFilter}
+        />
+      );
+    }
 
     return (
-      <div className={`${style.normal} todo-default-background`}>
+      <div className={`${style.normal}`}>
         <Header addTodo={todoStore.addTodo} />
         <TodoList
           todos={filteredTodos}

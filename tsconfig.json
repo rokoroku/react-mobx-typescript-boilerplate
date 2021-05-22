@@ -20,7 +20,12 @@
     "paths": {
       "app/*": ["./app/*"],
       "assets/*": ["./assets/*"]
-    }
+    },
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ],
+    "useDefineForClassFields": true,
   },
   "exclude": ["dist", "build", "node_modules"]
 }

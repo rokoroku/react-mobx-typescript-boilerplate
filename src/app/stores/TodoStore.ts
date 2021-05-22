@@ -1,12 +1,21 @@
-import { observable, computed, action } from 'mobx';
+import { action, computed, makeAutoObservable, observable } from 'mobx';
 import { TodoModel } from 'app/models';
+import { makePersistable } from 'mobx-persist-store';
 
 export class TodoStore {
-  constructor(fixtures: TodoModel[]) {
-    this.todos = fixtures;
-  }
 
-  @observable public todos: Array<TodoModel>;
+  @observable public todos: TodoModel[] = [];
+
+  constructor() {
+    makeAutoObservable(this, {}, { autoBind: true });
+    makePersistable(this, {
+      name: 'TodoStore',
+      properties: ['todos'],
+      expireIn: 15 * 60 * 1000, // 15 minutes so 900.000 milliseconds
+      removeOnExpiration: true,
+      storage: window.localStorage
+    }, { delay: 200, fireImmediately: true });
+  }
 
   @computed
   get activeTodos() {
@@ -20,6 +29,7 @@ export class TodoStore {
 
   @action
   addTodo = (item: Partial<TodoModel>): void => {
+    console.log(item);
     this.todos.push(new TodoModel(item.text, item.completed));
   };
 
@@ -53,5 +63,3 @@ export class TodoStore {
     this.todos = this.todos.filter((todo) => !todo.completed);
   };
 }
-
-export default TodoStore;
