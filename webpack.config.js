@@ -62,7 +62,7 @@ module.exports = {
     path: outPath,
     filename: isDeployedApp ? 'bundle.[name].[contenthash].js' : 'bundle.[name].[fullhash].js',
     chunkFilename: isDeployedApp ? 'chunk.[id].[contenthash].js' : 'chunk.[id].[fullhash].js',
-    assetModuleFilename: isDeployedApp ? '[contenthash][ext][query]' : '[fullhash][ext][query]'
+    assetModuleFilename: isDeployedApp ? '[contenthash][id].[ext][query]' : '[fullhash][id].[ext][query]'
   },
   target: 'web',
   resolve: {

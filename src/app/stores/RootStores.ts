@@ -1,5 +1,5 @@
 import { History } from 'history';
-import { NewStore, TodoStore } from './TodoStore';
+import { TodoStore } from './TodoStore';
 import { RouterStore } from './RouterStore';
 import { STORE_TODO, STORE_ROUTER } from 'app/constants';
 
@@ -10,7 +10,7 @@ export class RootStores {
 
   constructor(history: History) {
     this.routerStore = new RouterStore(history);
-    this.todoStore = NewStore();
+    this.todoStore = new TodoStore();
   }
 
   getStoresInstances(): { [store: string]: any } {

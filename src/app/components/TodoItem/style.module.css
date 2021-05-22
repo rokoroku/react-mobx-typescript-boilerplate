@@ -1,15 +1,14 @@
 .normal .toggle {
   text-align: center;
-  width: 40px;
+  width: 30px;
   /* auto, since non-WebKit browsers doesn't support input styling */
   height: auto;
   position: absolute;
   top: 0;
   bottom: 0;
-  margin: auto 0;
+  margin: auto 5px;
   /* Mobile Safari */
   border: none;
-  appearance: none;
 }
 
 .normal .toggle:after {

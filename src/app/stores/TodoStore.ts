@@ -1,15 +1,20 @@
 import { action, computed, makeAutoObservable, observable } from 'mobx';
 import { TodoModel } from 'app/models';
-import { persistence, StorageAdapter } from 'mobx-persist-store';
-import { PersistenceStore } from 'mobx-persist-store/lib/types';
-import { readStore, writeStore } from 'app/stores/persistence';
+import { makePersistable } from 'mobx-persist-store';
 
 export class TodoStore {
 
   @observable public todos: TodoModel[] = [];
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this, {}, { autoBind: true });
+    makePersistable(this, {
+      name: 'TodoStore',
+      properties: ['todos'],
+      expireIn: 15 * 60 * 1000, // 15 minutes so 900.000 milliseconds
+      removeOnExpiration: true,
+      storage: window.localStorage
+    }, { delay: 200, fireImmediately: true });
   }
 
   @computed
@@ -57,19 +62,4 @@ export class TodoStore {
   clearCompleted = (): void => {
     this.todos = this.todos.filter((todo) => !todo.completed);
   };
-}
-
-export function NewStore(): PersistenceStore<TodoStore> {
-  return persistence({
-    name: 'TodoStore',
-    properties: ['todos'],
-    adapter: new StorageAdapter({
-      read: readStore,
-      write: writeStore
-    }),
-    reactionOptions: {
-      // optional
-      delay: 200
-    }
-  })(new TodoStore());
 }
