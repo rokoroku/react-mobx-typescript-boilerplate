@@ -1,73 +1,63 @@
 import * as React from 'react';
+import {useState} from 'react';
 import * as classNames from 'classnames';
 import style from './style.module.css';
 
 export interface TodoTextInputProps {
-  text?: string;
-  placeholder?: string;
-  newTodo?: boolean;
-  editing?: boolean;
-  onSave: (text: string) => any;
+    text?: string;
+    placeholder?: string;
+    newTodo?: boolean;
+    editing?: boolean;
+    onSave: (text: string) => any;
 }
 
 export interface TodoTextInputState {
-  text: string;
+    text: string;
 }
 
-export class TodoTextInput extends React.Component<
-  TodoTextInputProps,
-  TodoTextInputState
-> {
-  constructor(props?: TodoTextInputProps, context?: any) {
-    super(props, context);
-    this.state = {
-      text: this.props.text || ''
+export const TodoTextInput = (props: TodoTextInputProps) => {
+
+    const [text, setText] = useState("")
+
+    const handleSubmit = (e) => {
+        const text = e.target.value.trim();
+        if (e.which === 13) {
+            props.onSave(text);
+            if (props.newTodo) {
+                setText("")
+            }
+        }
     };
-  }
 
-  private handleSubmit = (e) => {
-    const text = e.target.value.trim();
-    if (e.which === 13) {
-      this.props.onSave(text);
-      if (this.props.newTodo) {
-        this.setState({ text: '' });
-      }
-    }
-  };
+    const handleChange = (e) => {
+        setText(e.target.value);
+    };
 
-  private handleChange = (e) => {
-    this.setState({ text: e.target.value });
-  };
+    const handleBlur = (e) => {
+        const text = e.target.value.trim();
+        if (!props.newTodo) {
+            props.onSave(text);
+        }
+    };
 
-  private handleBlur = (e) => {
-    const text = e.target.value.trim();
-    if (!this.props.newTodo) {
-      this.props.onSave(text);
-    }
-  };
-
-  render() {
     const classes = classNames.default(
-      {
-        [style.edit]: this.props.editing,
-        [style.new]: this.props.newTodo
-      },
-      style.normal
+        {
+            [style.edit]: props.editing,
+            [style.new]: props.newTodo
+        },
+        style.normal
     );
 
-    return (
-      <input
+    return <input
         className={classes}
         type="text"
         autoFocus
-        placeholder={this.props.placeholder}
-        value={this.state.text}
-        onBlur={this.handleBlur}
-        onChange={this.handleChange}
-        onKeyDown={this.handleSubmit}
-      />
-    );
-  }
+        placeholder={props.placeholder}
+        value={text}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        onKeyDown={handleSubmit}
+    />;
 }
 
 export default TodoTextInput;
