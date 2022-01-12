@@ -1,18 +1,15 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {Root, RootStoreProvider} from 'app/stores';
-import {NewApp} from 'app';
+import { RootStore, RootStoreProvider } from 'app/stores';
+import { App } from 'app';
 import "./assets/global.css";
 
 // prepare MobX store(s)
-export const store = new Root();
-
-// prepare App
-const App = NewApp()
+export const store = new RootStore();
 
 ReactDOM.render(
     <RootStoreProvider {...store}>
-        <App/>
+        <App />
     </RootStoreProvider>,
     document.getElementById('root')
 );

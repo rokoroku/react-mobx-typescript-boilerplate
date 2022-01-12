@@ -1,18 +1,12 @@
 import React from 'react'
-import {hot} from 'react-hot-loader/root';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {TodoAppContainer} from 'app/containers/TodoApp';
+import {TodoContainer} from 'app/containers';
 import {observer} from "mobx-react";
 
-const AppContainer = observer(() => {
+export const App = observer(() => {
     return <BrowserRouter>
         <Routes>
-            <Route path='/' element={TodoAppContainer}/>
+            <Route path='/' element={<TodoContainer/>}/>
         </Routes>
     </BrowserRouter>;
 })
-
-// render react DOM
-export function NewApp(): () => JSX.Element {
-    return hot(() => <AppContainer/>);
-}

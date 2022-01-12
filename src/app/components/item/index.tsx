@@ -1,20 +1,20 @@
 import * as React from 'react';
 import {useState} from 'react';
 import * as classNames from 'classnames';
-import {TodoTextInput} from 'app/components/TodoTextInput';
-import {TodoModel} from 'app/models/TodoModel';
+import {InputComponent} from 'app/components/input';
+import {TodoModel} from 'app/models';
 import style from './style.module.css';
 
-export interface TodoActions {
+export interface ItemComponentActions {
     editTodo: (id: number, data: Partial<TodoModel>) => any;
     deleteTodo: (id: number) => any;
 }
 
-export interface TodoProps extends TodoActions {
+export interface ItemComponentProps extends ItemComponentActions {
     todo: TodoModel;
 }
 
-export const TodoItem = (props: TodoProps) => {
+export const ItemComponent = (props: ItemComponentProps) => {
 
     const [editing, setEditing] = useState(false);
 
@@ -52,7 +52,7 @@ export const TodoItem = (props: TodoProps) => {
     const {todo} = props;
 
     const element = editing ? (
-        <TodoTextInput
+        <InputComponent
             text={todo.text}
             editing={editing}
             onSave={(text) => updateTodo({text})}
@@ -78,10 +78,10 @@ export const TodoItem = (props: TodoProps) => {
     const classes = classNames.default({
         [style.completed]: todo.completed,
         [style.editing]: editing,
-        [style.normal]: editing
+        [style.normal]: !editing,
     });
 
     return <li className={classes}>{element}</li>;
 }
 
-export default TodoItem;
+export default ItemComponent;

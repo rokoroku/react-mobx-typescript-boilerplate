@@ -1,14 +1,14 @@
 import * as React from 'react';
-import {TodoActions, TodoItem} from 'app/components/TodoItem';
-import {TodoModel} from 'app/models/TodoModel';
+import {ItemComponentActions, ItemComponent} from 'app/components/item';
+import {TodoModel} from 'app/models';
 import style from './style.module.css';
 
-export interface TodoListProps extends TodoActions {
+export interface ListComponentProps extends ItemComponentActions {
     todos: TodoModel[];
     completeAll: () => any;
 }
 
-export const TodoList = (props: TodoListProps) => {
+export const ListComponent = (props: ListComponentProps) => {
 
     const handleToggleAll = (e: React.SyntheticEvent<any>) => {
         e.preventDefault();
@@ -33,10 +33,10 @@ export const TodoList = (props: TodoListProps) => {
         {renderToggleAll()}
         <ul className={`${style.normal}`}>
             {todos.map((todo) => (
-                <TodoItem key={todo.id} todo={todo} {...actions} />
+                <ItemComponent key={todo.id} todo={todo} {...actions} />
             ))}
         </ul>
     </section>;
 }
 
-export default TodoList;
+export default ListComponent;

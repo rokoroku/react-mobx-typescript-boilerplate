@@ -3,7 +3,7 @@ import * as classNames from 'classnames';
 import style from './style.module.css';
 import {TODO_FILTER_TITLES, TODO_FILTER_TYPES, TodoFilter} from 'app/constants';
 
-export interface FooterProps {
+export interface FooterComponentProps {
     filter: TodoFilter;
     activeCount: number;
     completedCount: number;
@@ -11,7 +11,7 @@ export interface FooterProps {
     onClearCompleted: () => any;
 }
 
-export const Footer = (props: FooterProps) => {
+export const FooterComponent = (props: FooterComponentProps) => {
     const renderTodoCount = () => {
         const {activeCount} = props;
         const itemWord = activeCount === 1 ? 'item' : 'items';
@@ -54,4 +54,4 @@ export const Footer = (props: FooterProps) => {
     </footer>;
 }
 
-export default Footer;
+export default FooterComponent;

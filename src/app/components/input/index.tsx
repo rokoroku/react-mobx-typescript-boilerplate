@@ -3,7 +3,7 @@ import {useState} from 'react';
 import * as classNames from 'classnames';
 import style from './style.module.css';
 
-export interface TodoTextInputProps {
+export interface InputComponentProps {
     text?: string;
     placeholder?: string;
     newTodo?: boolean;
@@ -11,11 +11,7 @@ export interface TodoTextInputProps {
     onSave: (text: string) => any;
 }
 
-export interface TodoTextInputState {
-    text: string;
-}
-
-export const TodoTextInput = (props: TodoTextInputProps) => {
+export const InputComponent = (props: InputComponentProps) => {
 
     const [text, setText] = useState("")
 
@@ -60,4 +56,4 @@ export const TodoTextInput = (props: TodoTextInputProps) => {
     />;
 }
 
-export default TodoTextInput;
+export default InputComponent;

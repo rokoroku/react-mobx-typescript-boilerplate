@@ -11,40 +11,6 @@ let isDeployedApp = (process.env.REACT_APP_ENVIRONMENT === "staging" || process.
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-// For our normal CSS files we would like them globally scoped
-const cssLoader = {
-  loader: 'css-loader',
-  options: {
-    modules: 'global',
-    importLoaders: 2,
-    sourceMap: true
-  }
-};
-
-// To avoid duplicate definition
-const styleLoader = isDeployedApp ? {
-  loader: MiniCssExtractPlugin.loader,
-  options: {
-    esModule: false
-  }
-} : 'style-loader';
-const postCSSLoader = {
-  loader: 'postcss-loader',
-  options: {
-    postcssOptions: {
-      ident: 'postcss',
-      plugins: [
-        require('postcss-import')({ addDependencyTo: webpack }),
-        require('postcss-url')(),
-        require('postcss-reporter')(),
-        require('postcss-browser-reporter')({
-          disabled: isDeployedApp
-        })
-      ]
-    }
-  }
-};
-
 // defining exports
 module.exports = {
   context: sourcePath,
@@ -59,7 +25,7 @@ module.exports = {
   },
   target: 'web',
   resolve: {
-    extensions: ['.js', '.ts', '.tsx', '.css'],
+    extensions: ['.js', '.ts', '.tsx'],
     // Fix webpack's default behavior to not load packages with jsnext:main module
     // (jsnext:main directs not usually distributable es6 format, but es6 sources)
     mainFields: ['module', 'browser', 'main'],
@@ -98,9 +64,8 @@ module.exports = {
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          styleLoader,
-          cssLoader,
-          postCSSLoader
+          'style-loader',
+          'css-loader'
         ]
       },
       /*

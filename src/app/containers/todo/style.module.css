@@ -17,7 +17,6 @@ button {
   font-weight: inherit;
   color: inherit;
   appearance: none;
-  font-smoothing: antialiased;
 }
 
 body {
@@ -31,7 +30,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
   -ms-font-smoothing: antialiased;
-  font-smoothing: antialiased;
   font-weight: 300;
 }
 
@@ -67,10 +65,24 @@ input[type='checkbox'] {
 
 .normal h1 {
   position: absolute;
-  top: -155px;
+  top: -200px;
   width: 100%;
   font-size: 100px;
   font-weight: 100;
+  text-align: center;
+  -webkit-text-rendering: optimizeLegibility;
+  -moz-text-rendering: optimizeLegibility;
+  -ms-text-rendering: optimizeLegibility;
+  text-rendering: optimizeLegibility;
+}
+
+.normal h2 {
+  position: absolute;
+  top: -75px;
+  width: 100%;
+  font-size: 25px;
+  font-weight: 25;
+  font-style: italic;
   text-align: center;
   -webkit-text-rendering: optimizeLegibility;
   -moz-text-rendering: optimizeLegibility;

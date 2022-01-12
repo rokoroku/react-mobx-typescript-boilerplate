@@ -1,1 +1,1 @@
-export * from './TodoApp';
+export * from './todo';

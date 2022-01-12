@@ -1,21 +1,33 @@
 import {action, computed, makeAutoObservable, observable} from 'mobx';
 import {TodoModel} from 'app/models';
 import {makePersistable} from 'mobx-persist-store';
+import { TodoFilter } from 'app/constants';
 
-export class Todo {
+export class TodoStore {
 
+    @observable public filter: TodoFilter = TodoFilter.ALL;
     @observable public todos: TodoModel[] = [];
 
     constructor() {
         makeAutoObservable(this, {}, {autoBind: true});
         makePersistable(this, {
             name: 'TodoStore',
-            properties: ['todos'],
-            expireIn: 15 * 60 * 1000, // 15 minutes so 900.000 milliseconds
+            properties: ['filter', 'todos'],
+            expireIn: 2 * 60 * 1000, // 2 minutes so 120.000 milliseconds
             removeOnExpiration: true,
             storage: window.localStorage
         }, {delay: 200, fireImmediately: true});
     }
+
+    @computed 
+    get currentFilter() {
+        return this.filter;
+    }
+
+    @action
+    setFilter = (newFilter: TodoFilter): void => {
+        this.filter = newFilter;
+    };
 
     @computed
     get activeTodos() {
@@ -29,7 +41,6 @@ export class Todo {
 
     @action
     addTodo = (item: Partial<TodoModel>): void => {
-        console.log(item);
         this.todos.push(new TodoModel(item.text, item.completed));
     };
 

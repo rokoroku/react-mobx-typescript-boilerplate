@@ -8,14 +8,22 @@ Ideal for creating React apps from the scratch.
 
 > IMPORTANT: The initial project has been created and developed at: [react-mobx-typescript-boilerplate](https://github.com/rokoroku/react-mobx-typescript-boilerplate). My work was all about updating the project regarding some points such as package json versions, store persistence, css module approach loading, etc.
 
+## Functionalities
+
+- [x] Developed using Typescript
+- [x] Functional Components approach used
+- [x] Clean architecture (containers, components, stores, etc)
+- [x] Build and run using webpack
+- [x] Mobx (with data persistence) consumed as "state"
+- [x] Environment & Configuration available
+
 ## Contains
 
-- [x] [Typescript](https://www.typescriptlang.org/) 4.2.4
+- [x] [Typescript](https://www.typescriptlang.org/) 4.5.4
 - [x] [React](https://facebook.github.io/react/) 17.0.2
-- [x] [React Router](https://github.com/ReactTraining/react-router) 5.2
-- [x] [Mobx](https://github.com/mobxjs/mobx) 6.2.0
-- [x] [Mobx React](https://github.com/mobxjs/mobx-react) 7.1.0
-- [x] [Mobx React Router](https://github.com/alisd23/mobx-react-router/) 4.1.0
+- [x] [React Router](https://github.com/ReactTraining/react-router) 6.2.1
+- [x] [Mobx](https://github.com/mobxjs/mobx) 6.3.12
+- [x] [Mobx React](https://github.com/mobxjs/mobx-react) 7.2.1
 
 ### Build tools
 
@@ -59,7 +67,6 @@ $ npm run prettier
 
 I still have a couple of points I would like to work on:
 
-- **Update MobX to its last version**: In fact, I wasn't able to upgrade mobx to the latest version (6.3.1 at the time) and so if someone wants to check it up, I am open to any help.
 - **Webpack (maybe) can be optimized**: I am a Golang, C/C++, C# backend developer, working on monolithic/microservices architecture etc... Really far from webpack/javascript/web developement so I might not have done the best job while upgrading the `webpack.config.js` file, so feel free to let me know if anything can be achieved in a better way!
 - **The package json could be optimized**: I know there is Dependencies, devDependencies etc. I am not really sure from my experience to clearly understand the difference with it but if someone could help me to better organize the dependencies between those two, I would appreciate.
 

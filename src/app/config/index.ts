@@ -1,4 +1,4 @@
-import { APP_ENVIRONMENT, appEnvrionmentFromString } from '../constants';
+import { APP_ENVIRONMENT, fromString as appEnvrionmentFromString } from 'app/constants';
 
 class Config {
     constructor() {

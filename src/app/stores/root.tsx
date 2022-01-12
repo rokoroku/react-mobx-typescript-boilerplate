@@ -1,17 +1,17 @@
 import React, {createContext, ReactNode, useContext} from 'react'
-import {Todo} from './todo';
+import {TodoStore} from './todo';
 
-export class Root {
-    todoStore: Todo;
+export class RootStore {
+    todoStore: TodoStore;
 
     constructor() {
-        this.todoStore = new Todo();
+        this.todoStore = new TodoStore();
     }
 }
 
-let store: Root;
+let store: RootStore;
 
-const StoreContext = createContext<Root | undefined>(undefined);
+const StoreContext = createContext<RootStore | undefined>(undefined);
 StoreContext.displayName = "StoreContext";
 
 function useRootStore() {
@@ -29,9 +29,9 @@ export function useTodoStore() {
 
 export function RootStoreProvider({children}: { children: ReactNode }) {
     // only create root store once (store is a singleton)
-    const root = store ?? new Root();
+    const root = store ?? new RootStore();
 
     return <StoreContext.Provider value={root}>{children}</StoreContext.Provider>;
 }
 
-export default Root;
+export default RootStore;
