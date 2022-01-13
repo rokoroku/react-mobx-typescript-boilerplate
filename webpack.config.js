@@ -88,6 +88,9 @@ module.exports = {
       }
     ]
   },
+  performance: {
+    hints: false,
+  },
   optimization: {
     splitChunks: {
       chunks: 'all',
@@ -95,7 +98,9 @@ module.exports = {
         vendors: {
           test: /[\\/]node_modules[\\/]/
         }
-      }
+      },
+      minSize: 10000,
+      maxSize: 25000,
     },
     minimize: true
   },

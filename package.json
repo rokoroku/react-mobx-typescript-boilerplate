@@ -6,7 +6,7 @@
     "eject": "react-scripts eject",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --mode=development --hot --progress --port 3000 --open",
-    "build": "webpack --progress --mode production",
+    "build": "webpack --progress --mode=production",
     "prettier": "prettier --write \"src/**/*.{ts,tsx,css}\""
   },
   "eslintConfig": {

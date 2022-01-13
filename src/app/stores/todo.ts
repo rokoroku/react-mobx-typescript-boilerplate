@@ -2,6 +2,7 @@ import {action, computed, makeAutoObservable, observable} from 'mobx';
 import {TodoModel} from 'app/models';
 import {makePersistable} from 'mobx-persist-store';
 import { TodoFilter } from 'app/constants';
+import { config } from 'app/config';
 
 export class TodoStore {
 
@@ -13,7 +14,7 @@ export class TodoStore {
         makePersistable(this, {
             name: 'TodoStore',
             properties: ['filter', 'todos'],
-            expireIn: 2 * 60 * 1000, // 2 minutes so 120.000 milliseconds
+            expireIn: config.todoStorePersistenceMinutes * 60 * 1000,
             removeOnExpiration: true,
             storage: window.localStorage
         }, {delay: 200, fireImmediately: true});
