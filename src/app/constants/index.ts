@@ -1,3 +1,3 @@
 export * from './env';
-export * from './stores';
+export * from './routes';
 export * from './todos';

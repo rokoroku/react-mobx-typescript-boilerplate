@@ -1,21 +1,15 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Provider } from 'mobx-react';
-import { createBrowserHistory } from 'history';
-import {RootStores} from 'app/stores';
-import { NewApp } from 'app';
+import { RootStore, RootStoreProvider } from 'app/stores';
+import { App } from 'app';
 import "./assets/global.css";
 
-// prepare MobX stores
-const history = createBrowserHistory();
-export const stores = new RootStores(history).getStoresInstances();
-
-// prepare App
-const App = NewApp(history)
+// prepare MobX store(s)
+export const store = new RootStore();
 
 ReactDOM.render(
-  <Provider {...stores}>
-    <App/>
-  </Provider>,
-  document.getElementById('root')
+    <RootStoreProvider {...store}>
+        <App />
+    </RootStoreProvider>,
+    document.getElementById('root')
 );

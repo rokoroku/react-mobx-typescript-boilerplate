@@ -1,72 +1,32 @@
-let webpack = require('webpack');
-let path = require('path');
+const path = require("path");
+const webpack = require('webpack');
 
 // variables
 let dotenv = require('dotenv').config({ path: __dirname + '/.env' });
 let sourcePath = path.join(__dirname, './src');
 let outPath = path.join(__dirname, './build');
-let isDeployedApp = (process.env.REACT_APP_ENVIRONMENT === 'staging' || process.env.REACT_APP_ENVIRONMENT === 'production');
+let isDeployedApp = (process.env.REACT_APP_ENVIRONMENT === "staging" || process.env.REACT_APP_ENVIRONMENT === "production");
 
 // plugins
-let HtmlWebpackPlugin = require('html-webpack-plugin');
-let MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
-// For our css modules these will be locally scoped
-const cssModuleLoader = {
-  loader: 'css-loader',
-  options: {
-    modules: true,
-    importLoaders: 2,
-    sourceMap: true
-  }
-};
-// For our normal CSS files we would like them globally scoped
-const cssLoader = {
-  loader: 'css-loader',
-  options: {
-    modules: 'global',
-    importLoaders: 2,
-    sourceMap: true
-  }
-};
-// To avoid duplicate definition
-const styleLoader = isDeployedApp ? {
-  loader: MiniCssExtractPlugin.loader,
-  options: {
-    esModule: false
-  }
-} : 'style-loader';
-const postCSSLoader = {
-  loader: 'postcss-loader',
-  options: {
-    postcssOptions: {
-      ident: 'postcss',
-      plugins: [
-        require('postcss-import')({ addDependencyTo: webpack }),
-        require('postcss-url')(),
-        require('postcss-reporter')(),
-        require('postcss-browser-reporter')({
-          disabled: isDeployedApp
-        })
-      ]
-    }
-  }
-};
-
+// defining exports
 module.exports = {
   context: sourcePath,
   entry: {
-    app: './main.tsx'
+    app: './main.tsx',
   },
   output: {
     path: outPath,
-    filename: isDeployedApp ? 'bundle.[name].[contenthash].js' : 'bundle.[name].[fullhash].js',
-    chunkFilename: isDeployedApp ? 'chunk.[id].[contenthash].js' : 'chunk.[id].[fullhash].js',
-    assetModuleFilename: isDeployedApp ? '[contenthash][id].[ext][query]' : '[fullhash][id].[ext][query]'
+    filename: isDeployedApp ? 'bundle.[id].js' : 'bundle.[fullhash].[id].js',
+    chunkFilename: isDeployedApp ? 'chunk.[id].js' : 'chunk.[fullhash].[id].js',
+    assetModuleFilename: isDeployedApp ? 'assets.[id].[ext]' : 'assets.[fullhash].[id].[ext]'
   },
   target: 'web',
   resolve: {
-    extensions: ['.js', '.ts', '.tsx', '.css'],
+    extensions: ['.js', '.ts', '.tsx'],
     // Fix webpack's default behavior to not load packages with jsnext:main module
     // (jsnext:main directs not usually distributable es6 format, but es6 sources)
     mainFields: ['module', 'browser', 'main'],
@@ -85,11 +45,13 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           !isDeployedApp && {
-            loader: 'babel-loader',
-            options: { plugins: ['react-hot-loader/babel'] }
+            loader: require.resolve('babel-loader'),
+            options: {
+              plugins: [require.resolve('react-refresh/babel')],
+            },
           },
           'ts-loader'
-        ].filter(Boolean)
+        ].filter(Boolean),
       },
       /*
       * JavaScript files.
@@ -104,19 +66,9 @@ module.exports = {
       */
       {
         test: /\.(sa|sc|c)ss$/,
-        exclude: /\.module\.(sa|sc|c)ss$/,
         use: [
-          styleLoader,
-          cssLoader,
-          postCSSLoader
-        ]
-      },
-      {
-        test: /\.module\.(sa|sc|c)ss$/,
-        use: [
-          styleLoader,
-          cssModuleLoader,
-          postCSSLoader
+          'style-loader',
+          'css-loader'
         ]
       },
       /*
@@ -131,13 +83,16 @@ module.exports = {
         loader: 'file-loader'
       },
       {
-        test: /\.(png|jpg|jpeg|gif)$/,
+        test: /\.(svg|png|jpg|jpeg|gif)$/,
         loader: 'file-loader',
         options: {
           esModule: false
         }
       }
     ]
+  },
+  performance: {
+    hints: false,
   },
   optimization: {
     splitChunks: {
@@ -146,31 +101,35 @@ module.exports = {
         vendors: {
           test: /[\\/]node_modules[\\/]/
         }
-      }
+      },
+      minSize: 10000,
+      maxSize: 25000,
     },
     minimize: true
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': JSON.stringify(dotenv.parsed)
+      "process.env": JSON.stringify(dotenv.parsed)
     }),
     new MiniCssExtractPlugin({
-      filename: isDeployedApp ? 'styles.[contenthash].css' : 'styles.[fullhash].css'
+      filename: isDeployedApp ? 'styles.[id].css' : 'styles.[fullhash].[id].css'
     }),
     new HtmlWebpackPlugin({
-      template: 'assets/index.html'
-    })
+      template: 'assets/index.html',
+    }),
+    ...(!isDeployedApp ? [new ReactRefreshWebpackPlugin()] : []),
   ],
   devServer: {
-    contentBase: sourcePath,
+    static: sourcePath,
     hot: true,
-    inline: true,
     historyApiFallback: {
       disableDotRule: true
     },
-    stats: 'minimal',
-    clientLogLevel: 'warning'
+    client: {
+      logging: 'warn',
+    },
   },
   // https://webpack.js.org/configuration/devtool/
   devtool: isDeployedApp ? 'hidden-source-map' : 'eval-cheap-module-source-map'
 };
+
