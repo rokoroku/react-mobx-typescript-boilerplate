@@ -41,8 +41,6 @@
     "mobx": "^6.3.12",
     "mobx-persist-store": "^1.0.4",
     "mobx-react": "^7.2.1",
-    "mobx-react-router": "^4.1.0",
-    "mobx-store-provider": "^2.1.2",
     "postcss": "^8.4.5",
     "postcss-browser-reporter": "^0.6.0",
     "postcss-import": "^14.0.2",
