@@ -2,7 +2,7 @@ const path = require("path");
 const webpack = require('webpack');
 
 // variables
-let dotenv = require('dotenv').config({path: __dirname + '/.env'});
+let dotenv = require('dotenv').config({ path: __dirname + '/.env' });
 let sourcePath = path.join(__dirname, './src');
 let outPath = path.join(__dirname, './build');
 let isDeployedApp = (process.env.REACT_APP_ENVIRONMENT === "staging" || process.env.REACT_APP_ENVIRONMENT === "production");
@@ -10,6 +10,7 @@ let isDeployedApp = (process.env.REACT_APP_ENVIRONMENT === "staging" || process.
 // plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 // defining exports
 module.exports = {
@@ -44,11 +45,13 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           !isDeployedApp && {
-            loader: 'babel-loader',
-            options: { plugins: ['react-hot-loader/babel'] }
+            loader: require.resolve('babel-loader'),
+            options: {
+              plugins: [require.resolve('react-refresh/babel')],
+            },
           },
           'ts-loader'
-        ].filter(Boolean)
+        ].filter(Boolean),
       },
       /*
       * JavaScript files.
@@ -113,7 +116,8 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: 'assets/index.html',
-    })
+    }),
+    ...(!isDeployedApp ? [new ReactRefreshWebpackPlugin()] : []),
   ],
   devServer: {
     static: sourcePath,
