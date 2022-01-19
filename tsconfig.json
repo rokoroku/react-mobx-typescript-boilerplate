@@ -15,11 +15,20 @@
     "removeComments": true,
     "strictNullChecks": false,
     "outDir": "build",
-    "lib": ["es6", "es7", "dom", "esnext"],
+    "lib": [
+      "es6",
+      "es7",
+      "dom",
+      "esnext"
+    ],
     "baseUrl": "src",
     "paths": {
-      "app/*": ["./app/*"],
-      "assets/*": ["./assets/*"]
+      "app/*": [
+        "./app/*"
+      ],
+      "assets/*": [
+        "./assets/*"
+      ]
     },
     "typeRoots": [
       "./node_modules/@types",
@@ -27,5 +36,9 @@
     ],
     "useDefineForClassFields": true,
   },
-  "exclude": ["dist", "build", "node_modules"]
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules"
+  ]
 }

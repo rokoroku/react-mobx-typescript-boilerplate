@@ -40,7 +40,7 @@ export const TodoContainer = observer((props) => {
   }
 
   return (
-    <div className={`${style.normal}`}>
+    <div className={style.normal}>
       <HeaderComponent addTodo={todoStore.addTodo} />
       <ListComponent
         todos={filteredTodos}
